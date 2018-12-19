@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-
+import { NavController, IonicPage } from 'ionic-angular';
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -11,4 +11,10 @@ export class HomePage {
 
   }
 
+  cadastrarCliente() {
+    this.navCtrl.push('ClientePage');
+  }
+  listarCliente() {
+    this.navCtrl.push('ListarClientePage');
+  }
 }

@@ -1,0 +1,52 @@
+<!--
+  Generated template for the DetalheClientePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>detalheCliente</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item-sliding>
+    <ion-item>
+      <h2>{{cliente?.nome }}</h2>
+      <p>CPF: {{cliente?.cpf}}</p>
+      <p>RG: {{cliente?.rg}}</p>
+      <p>Bairro: {{cliente?.bairro}}</p>
+      <p>Número: {{cliente?.numero}}</p>
+      <p>Rua: {{cliente?.rua}}</p>
+      <p>Quadra: {{cliente?.quadra}}</p>
+      <p>Complemento: {{cliente?.complemento}}</p>
+      <p>Telefone: {{cliente?.telefone}}</p>
+    </ion-item>
+  </ion-item-sliding>
+
+  <ion-item>
+    <h2>Compras</h2>
+  </ion-item>
+  <ion-item>
+    <button ion-button (click)="novaCompra()"> Nova compra </button>
+  </ion-item>
+  <ion-item-sliding *ngFor="let c of compras">
+    <ion-item>
+      <h2>Data: {{c.dataCompra }}</h2>
+      <p>Tipo de pagamento: {{c.pagamento}}</p>
+      <p>Status: {{c.status == 0? 'pendente' : 'pago'}}</p>
+      <button ion-button clear item-end (click)="selecionarCompra(c.id)">Selecionar</button>
+    </ion-item>
+
+    <ion-item-options side="right">
+      <button ion-button color="danger">
+        <ion-icon name="delete"></ion-icon>
+        Eliminar
+      </button>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-content>

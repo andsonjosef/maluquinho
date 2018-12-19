@@ -1,0 +1,52 @@
+<!--
+  Generated template for the NovaCompraPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>novaCompra</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <button ion-button (click)="addRow()">Novo item</button>
+  <ion-list>
+    <ion-list *ngFor="let row of rows;let i=index">
+      <ion-item>
+        <ion-label floating>Item</ion-label>
+        <ion-input [(ngModel)]="itemN[i]" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Quantidade</ion-label>
+        <ion-input [(ngModel)]="quantidades[i]" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Preço</ion-label>
+        <ion-input [(ngModel)]="precos[i] " type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <p item-end>Total: {{precos[i] * quantidades[i] | currency}}</p>
+      </ion-item>
+
+    </ion-list>
+    <button ion-button (click)="openModal()">Pagamento</button>
+
+  </ion-list>
+<!-- 
+  <ion-list>
+      <ion-item>
+        <ion-label floating>Quantidade parcelas</ion-label>
+        <ion-input [(ngModel)]="compra.qtdParcelas" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Primeira parcela</ion-label>
+        <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="compra.primeiraParcela"></ion-datetime>
+      </ion-item>
+    </ion-list>
+    -->
+</ion-content>

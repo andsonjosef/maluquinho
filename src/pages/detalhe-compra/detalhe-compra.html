@@ -1,0 +1,44 @@
+<!--
+  Generated template for the DetalheCompraPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>detalheCompra</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item-sliding>
+    <ion-item>
+    dataCompra: "",
+      <h2>{{compra?.dataCompra }}</h2>
+      <p>parcelas: {{compra?.qtdParcelas}}</p>          
+    </ion-item>
+  </ion-item-sliding>
+
+  <ion-item>
+    <h2>Itens</h2>
+  </ion-item>
+
+  <ion-item-sliding *ngFor="let i of itens">
+    <ion-item>
+      <h2>Data: {{i.item }}</h2>
+      <p>Quantidade {{i.quantidade}}</p>
+      <p>Preco: {{i.preco}}</p>
+      <p>Total: {{i.total}}</p>
+    </ion-item>
+
+    <ion-item-options side="right">
+      <button ion-button color="danger">
+        <ion-icon name="delete"></ion-icon>
+        Eliminar
+      </button>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-content>

@@ -5,26 +5,40 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+
+import { SQLite } from '@ionic-native/sqlite';
+import { ClienteDB } from '../providers/database/clientedb';
+import { HttpModule } from '@angular/http';
+import { CompraDB } from '../providers/database/compradb';
+import { ItemDB } from '../providers/database/itemdb';
+
+import { CurrencyMaskModule } from "ng2-currency-mask";
+import { PagamentoModalPageModule } from '../pages/pagamento-modal/pagamento-modal.module';
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage
+    MyApp
+    
   ],
   imports: [
+    HttpModule,
     BrowserModule,
+    CurrencyMaskModule,
+    PagamentoModalPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage
+    MyApp
   ],
   providers: [
     StatusBar,
+    SQLite,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ClienteDB,
+    CompraDB,
+    ItemDB
   ]
 })
 export class AppModule {}

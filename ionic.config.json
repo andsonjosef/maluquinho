@@ -1,5 +1,7 @@
 {
   "name": "maluquinho",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }
