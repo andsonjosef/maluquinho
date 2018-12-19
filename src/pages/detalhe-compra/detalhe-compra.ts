@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ItemDB } from '../../providers/database/itemdb';
-import { CompraDB } from '../../providers/database/compradb';
+import { ParcelaDB } from '../../providers/database/parceladb.';
 
 /**
  * Generated class for the DetalheCompraPage page.
@@ -18,11 +18,11 @@ import { CompraDB } from '../../providers/database/compradb';
 export class DetalheCompraPage {
   id
   private itens: any;
-
+  private parcelas: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private compradb: CompraDB,
+    private parceladb: ParcelaDB,
     private itemdb: ItemDB) {
   }
 
@@ -30,14 +30,23 @@ export class DetalheCompraPage {
   ionViewDidLoad() {
     this.id = this.navParams.get('id');
     this.listarItens(this.id);
+    this.listarParcelas(this.id);
     console.log('ionViewDidLoad DetalheCompraPage');
   }
 
 
   listarItens(id: number) {
     this.itemdb.listarItens(id).then((data: any) => {
-
       this.itens = data;
+      console.log(data);
+    }, (error) => {
+      console.log(error);
+    })
+  }
+
+  listarParcelas(id: number) {
+    this.parceladb.listarParcelaCompra(id).then((data: any) => {
+      this.parcelas = data;
       console.log(data);
     }, (error) => {
       console.log(error);

@@ -75,7 +75,11 @@ export class ClientePage {
 
 
   ionViewDidLoad() {
-   
+    var month = this.date.getMonth();
+    this.date.setMonth(month + 1);
+  
+    let datePipe = new DatePipe('en-US');
+    let formatade = datePipe.transform(this.date, 'dd-MM-yyyy');
     console.log('ionViewDidLoad ClientePage');
   }
 

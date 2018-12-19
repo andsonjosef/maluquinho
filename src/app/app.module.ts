@@ -14,6 +14,7 @@ import { ItemDB } from '../providers/database/itemdb';
 
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { PagamentoModalPageModule } from '../pages/pagamento-modal/pagamento-modal.module';
+import { ParcelaDB } from '../providers/database/parceladb.';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { PagamentoModalPageModule } from '../pages/pagamento-modal/pagamento-mod
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ClienteDB,
     CompraDB,
+    ParcelaDB,
     ItemDB
   ]
 })

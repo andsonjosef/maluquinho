@@ -58,6 +58,7 @@ export class NovaCompraPage {
     private itemdb: ItemDB) {
     this.rows = [false];
   }
+  
 
   calcular(i) {
     this.precos[i] = parseInt(this.precos[i].toFixed(2));
@@ -134,6 +135,7 @@ export class NovaCompraPage {
 
   openModal() {
 
+    this.total = 0;
     let i = 0;
     while (i < this.rows.length) {
       this.item = {
@@ -152,7 +154,7 @@ export class NovaCompraPage {
     }
 
 
-    let modal = this.modalCtrl.create(PagamentoModalPage, { total: this.total, itens: this.itens });
+    let modal = this.modalCtrl.create(PagamentoModalPage, { total: this.total, itens: this.itens, clienteId: this.clienteId });
     modal.present();
   }
 
