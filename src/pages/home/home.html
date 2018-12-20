@@ -1,14 +1,14 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content padding>
- 
-    <button ion-button block (click)="cadastrarCliente()">Cadastrar Cliente</button>
-    <button ion-button block (click)="listarCliente()">Listar Cliente</button>
-
-</ion-content>
+  <ion-content class="card-background-page">
+    <ion-card  (click)="listarCliente()">
+      <img src="/assets/imgs/clientes.png" />
+      <div class="card-title">CLIENTES</div>
+    </ion-card>
+    <ion-card  >
+      <img src="/assets/imgs/cobrar.png" />
+      <div class="card-title">COBRAR</div>
+    </ion-card>
+    <ion-card  >
+      <img src="/assets/imgs/contas.jpg" />
+      <div class="card-title">RELATÓRIO</div>
+    </ion-card>
+  </ion-content>

@@ -38,7 +38,7 @@
     <p item-end>Preço por parcela: {{final / compra.qtdParcelas | currency}}</p>
     <ion-item>
       <ion-label>Primeira parcela</ion-label>
-      <ion-datetime displayFormat="DD MM YYYY" [(ngModel)]="compra.primeiraParcela"></ion-datetime>
+      <ion-datetime displayFormat="DD MM YYYY" max="3000-12-31" [(ngModel)]="compra.primeiraParcela"></ion-datetime>
     </ion-item>
 
     <h2>Itens</h2>

@@ -19,6 +19,9 @@
     <ion-item>
       <h2>Clientes</h2>
     </ion-item>
+    <ion-item>
+      <button ion-button (click)="cadastrarCliente()">Novo Cliente </button>
+    </ion-item>
     <ion-item-sliding  *ngFor="let c of listaCliente">
       <ion-item >
         <h2>{{c.nome }}</h2>
