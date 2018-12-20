@@ -16,8 +16,8 @@
 
 
 
-  <button ion-button (click)="addRow()">Novo item</button>
-  <ion-list>
+
+  <ion-list style="margin-bottom: 50px">
 
     <ion-list *ngFor="let row of rows;let i=index">
       <ion-item>
@@ -41,10 +41,20 @@
       <ion-item>
         <p item-end>Total: {{precos[i] * quantidades[i] | currency}}</p>
       </ion-item>
-
+      <ion-fab right>
+        <button ion-fab mini color="danger" (click)="removeRow(i)">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-fab>
     </ion-list>
-    <button ion-button (click)="openModal()">Pagamento</button>
+
+    <ion-fab>
+      <button ion-fab mini color="secondary" (click)="addRow()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-fab>
+
 
   </ion-list>
-
+    <button style="margin-top: 40px" ion-button (click)="openModal()">Pagamento</button>
 </ion-content>

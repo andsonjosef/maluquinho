@@ -5,22 +5,12 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>detalheCompra</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-  <ion-item-sliding>
-    <ion-item>
-      dataCompra: "",
-      <h2>{{compra?.dataCompra }}</h2>
-      <p>parcelas: {{compra?.qtdParcelas}}</p>
-    </ion-item>
-  </ion-item-sliding>
 
   <ion-item>
     <h2>Itens</h2>
@@ -31,7 +21,7 @@
       <h2>Item: {{i.item }}</h2>
       <p>Quantidade {{i.quantidade}}</p>
       <p>Preco: {{i.preco}}</p>
-      <p>Total: {{i.total}}</p>
+      <p>Total: {{i.preco * i.quantidade | currency}}</p>
     </ion-item>
   </ion-item-sliding>
 
@@ -42,11 +32,9 @@
   <ion-item-sliding *ngFor="let p of parcelas">
     <ion-item>
       <h2>Parcela: {{p.parcela }}</h2>
-      <p>Preco: {{i.preco}}</p>
+      <p>Preco: {{p.preco}}</p>
       <p>Vencimento {{p.vencimento}}</p>
       <p>Status: {{p.status == 0? 'pendente' : 'pago'}}</p>
-    </ion-item>
-
-   
+    </ion-item>  
   </ion-item-sliding>
 </ion-content>

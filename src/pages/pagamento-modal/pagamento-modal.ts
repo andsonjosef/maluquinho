@@ -141,6 +141,7 @@ export class PagamentoModalPage {
         buttons: ['OK']
       });
       alert.present();
+      this.navCtrl.setRoot('DetalheClientePage', { id: this.clienteId });
 
     }, (error) => {
       const alert = this.alertCtrl.create({

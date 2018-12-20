@@ -43,7 +43,6 @@ export class NovaCompraPage {
   precos: number[] = []
   totalI: number[] = []
   idCompras: number[] = []
-  srows: boolean[] = [];
   rows: boolean[] = [];
   itens: any[] = [];
   clienteId;
@@ -70,22 +69,12 @@ export class NovaCompraPage {
     this.rows.push(false);
   }
 
-  removeRow() {
-
-    let i = 0;
-
-    while (i < this.srows.length) {
-      if (this.srows[i] == true) {
+  removeRow(i) {    
         this.itemN.splice(i, 1);
         this.quantidades.splice(i, 1);
         this.precos.splice(i, 1);
         this.idCompras.splice(i, 1);
-        this.srows.splice(i, 1);
         this.rows.splice(i, 1);
-        i--;
-      }
-      i++;
-    }
   }
   ionViewDidLoad() {
     this.clienteId = this.navParams.get('id');

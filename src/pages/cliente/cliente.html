@@ -17,8 +17,7 @@
 
 
   <form [formGroup]="todo" (ngSubmit)="cadastrarCliente()" novalidate>
-      <ion-label>{{date}}</ion-label>
-
+     
     <ion-item>
       <ion-label floating>Nome</ion-label>
       <ion-input [(ngModel)]="cliente.nome" type="text" formControlName="nome"></ion-input>

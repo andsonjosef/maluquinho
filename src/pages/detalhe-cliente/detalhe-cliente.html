@@ -37,7 +37,7 @@
   <ion-item-sliding *ngFor="let c of compras">
     <ion-item>
       <h2>Data: {{c.dataCompra }}</h2>
-      <p>Tipo de pagamento: {{c.pagamento}}</p>
+      <p>Valor: {{c.total}}</p>
       <p>Status: {{c.status == 0? 'pendente' : 'pago'}}</p>
       <button ion-button clear item-end (click)="selecionarCompra(c.id)">Selecionar</button>
     </ion-item>

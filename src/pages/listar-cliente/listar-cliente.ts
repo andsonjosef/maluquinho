@@ -44,7 +44,6 @@ export class ListarClientePage {
   }
 
   selecionarCliente(id: string) {
-    console.log("slecionar " + id);
     this.navCtrl.push('DetalheClientePage', { id: id });
   }
 

@@ -85,5 +85,16 @@ export class ParcelaDB {
       });
     });
   }
+
+  pagarParcela(id) {
+    return new Promise((resolve, reject) => {
+      let sql = "UPDATE parcela SET status = 1 WHERE id = ?";
+      this.db.executeSql(sql, [id]).then((data) => {
+        resolve(data);
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
 }
 
