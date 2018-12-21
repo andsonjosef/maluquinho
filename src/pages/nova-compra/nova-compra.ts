@@ -84,7 +84,7 @@ export class NovaCompraPage {
 
   cadastrarCompra() {
     let date = new Date();
-    let datePipe = new DatePipe('en-US');
+    let datePipe = new DatePipe('pt');
     let formatade = datePipe.transform(date, 'dd-MM-yyyy');
 
     this.compra.dataCompra = formatade;

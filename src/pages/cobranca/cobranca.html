@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <ion-title>
+      Combranças
+    </ion-title>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="cobranca">
+      <ion-segment-button value="vencidos">
+        Vencidos
+      </ion-segment-button>
+      <ion-segment-button value="hoje">
+        Hoje
+      </ion-segment-button>
+      <ion-segment-button value="amanha">
+        Amanhã
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div [ngSwitch]="cobranca">
+    <ion-list *ngSwitchCase="'vencidos'">
+      <ion-item *ngFor="let p of parcelasVencidas">
+        <h2>Parcela: {{p.parcela }}</h2>
+        <p>Preco: {{p.preco}}</p>
+        <p>Vencimento {{p.vencimento}}</p>
+        <p>Status: {{p.status == 0? 'pendente' : 'pago'}}</p>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'hoje'">
+
+      <ion-item *ngFor="let p of parcelas">
+        <h2>Parcela: {{p.parcela }}</h2>
+        <p>Preco: {{p.preco}}</p>
+        <p>Vencimento {{p.vencimento}}</p>
+        <p>Status: {{p.status == 0? 'pendente' : 'pago'}}</p>
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'amanha'">
+      <ion-item *ngFor="let p of parcelasAmanha">
+        <h2>Parcela: {{p.parcela }}</h2>
+        <p>Preco: {{p.preco}}</p>
+        <p>Vencimento {{p.vencimento}}</p>
+        <p>Status: {{p.status == 0? 'pendente' : 'pago'}}</p>
+      </ion-item>
+
+    </ion-list>
+  </div>
+</ion-content>

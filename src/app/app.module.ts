@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule, LOCALE_ID } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -15,7 +15,10 @@ import { ItemDB } from '../providers/database/itemdb';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { PagamentoModalPageModule } from '../pages/pagamento-modal/pagamento-modal.module';
 import { ParcelaDB } from '../providers/database/parceladb.';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 
+registerLocaleData(localePt, 'pt');
 @NgModule({
   declarations: [
     MyApp
@@ -37,6 +40,7 @@ import { ParcelaDB } from '../providers/database/parceladb.';
     SQLite,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: LOCALE_ID, useValue: 'pt' },
     ClienteDB,
     CompraDB,
     ParcelaDB,

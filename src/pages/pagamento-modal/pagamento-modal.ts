@@ -45,7 +45,7 @@ export class PagamentoModalPage {
     status: 0,
     preco: 0,
     idCompra: 0,
-    vencimento: new Date()
+    vencimento: ""
   }
   itens: any[] = [];
   clienteId;
@@ -80,7 +80,6 @@ export class PagamentoModalPage {
   }
 
   cadastrarCompra() {
-    console.log("data esc " + this.compra.primeiraParcela);
     let date = new Date();
     let datePipe = new DatePipe('en-US');
     let formatade = datePipe.transform(date, 'dd-MM-yyyy');
@@ -110,18 +109,23 @@ export class PagamentoModalPage {
       }
 
       for (let i = 0; i < this.compra.qtdParcelas; i++) {
-        let date = new Date(this.compra.primeiraParcela);
+        console.log("(this.compra.primeiraParcela " + this.compra.primeiraParcela);
 
+        let date = new Date(this.compra.primeiraParcela);
+        console.log("date " + date);
         var month = date.getMonth();
         date.setMonth(month + i);
-
+        date.setDate(date.getDate() + 1);
+        let datePipe = new DatePipe('pt'); 
+        let formatade = datePipe.transform(date, 'yyyy-MM-dd');
+        console.log("formatade " + formatade);
         this.parcela = {
           id: 0,
           parcela: (i + 1) + "/" + this.compra.qtdParcelas,
           status: 0,
           preco: this.final / this.compra.qtdParcelas,
           idCompra: 0,
-          vencimento: date
+          vencimento: formatade
 
         }
         console.log("this.parcela");

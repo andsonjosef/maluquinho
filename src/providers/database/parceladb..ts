@@ -55,19 +55,67 @@ export class ParcelaDB {
 
   listarVencimentoDia(dataV) {
     return new Promise((resolve, reject) => {
-      this.db.executeSql("SELECT * FROM parecela where vencimento = ? ", [dataV]).then((data) => {
-        let item;
+      this.db.executeSql("SELECT * FROM parcela where vencimento = ? and status = 0 ", [dataV]).then((data) => {
+        let arrayItens = [];
         if (data.rows.length > 0) {
-          item = {
-            id: data.rows.item(0).id,
-            parcela: data.rows.item(0).parcela,
-            status: data.rows.item(0).status,
-            preco: data.rows.item(0).preco,
-            vencimento: data.rows.item(0).vencimento,
-            idCompra: data.rows.item(0).idCompra,
-          };
+          for (var i = 0; i < data.rows.length; i++) {
+            arrayItens.push({
+              id: data.rows.item(i).id,
+              parcela: data.rows.item(i).parcela,
+              status: data.rows.item(i).status,
+              preco: data.rows.item(i).preco,
+              vencimento: data.rows.item(i).vencimento,
+              idCompra: data.rows.item(i).idCompra,
+            });
+          }
         }
-        resolve(item);
+        resolve(arrayItens);
+      }, (error) => {
+        reject(error);
+      })
+    })
+  }
+
+  listarVencidos(dataV) {
+    return new Promise((resolve, reject) => {
+      this.db.executeSql("SELECT * FROM parcela where vencimento < ? and status = 0 ", [dataV]).then((data) => {
+        let arrayItens = [];
+        if (data.rows.length > 0) {
+          for (var i = 0; i < data.rows.length; i++) {
+            arrayItens.push({
+              id: data.rows.item(i).id,
+              parcela: data.rows.item(i).parcela,
+              status: data.rows.item(i).status,
+              preco: data.rows.item(i).preco,
+              vencimento: data.rows.item(i).vencimento,
+              idCompra: data.rows.item(i).idCompra,
+            });
+          }
+        }
+        resolve(arrayItens);
+      }, (error) => {
+        reject(error);
+      })
+    })
+  }
+
+  listarParcelasAmanha(dataV) {
+    return new Promise((resolve, reject) => {
+      this.db.executeSql("SELECT * FROM parcela where vencimento = ? and status = 0 ", [dataV]).then((data) => {
+        let arrayItens = [];
+        if (data.rows.length > 0) {
+          for (var i = 0; i < data.rows.length; i++) {
+            arrayItens.push({
+              id: data.rows.item(i).id,
+              parcela: data.rows.item(i).parcela,
+              status: data.rows.item(i).status,
+              preco: data.rows.item(i).preco,
+              vencimento: data.rows.item(i).vencimento,
+              idCompra: data.rows.item(i).idCompra,
+            });
+          }
+        }
+        resolve(arrayItens);
       }, (error) => {
         reject(error);
       })

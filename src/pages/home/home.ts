@@ -14,6 +14,9 @@ export class HomePage {
   cadastrarCliente() {
     this.navCtrl.push('ClientePage');
   }
+  cobranca() {
+    this.navCtrl.push('CobrancaPage');
+  }
   listarCliente() {
     this.navCtrl.push('ListarClientePage');
   }
