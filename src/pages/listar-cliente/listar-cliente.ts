@@ -50,14 +50,20 @@ export class ListarClientePage {
     this.navCtrl.push('ClientePage');
   }
   pesquisar(ev: any) {
-    this.listarClientes();
+    this.listaCliente = [];
 
     const val = ev.target.value;
 
     if (val && val.trim() != '') {
-      this.listaCliente.nome = this.listaCliente.nome.filter((c) => {
-        return (c.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      this.database.listarClientesNome(val).then((data: any) => {
+        console.log(val);
+        console.log(data);
+        this.listaCliente = data;
+      }, (error) => {
+        console.log(error);
       })
+    }else{
+      this.listarClientes();
     }
   }
 

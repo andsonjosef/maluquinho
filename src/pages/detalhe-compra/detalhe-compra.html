@@ -20,7 +20,7 @@
     <ion-item>
       <h2>Item: {{i.item }}</h2>
       <p>Quantidade {{i.quantidade}}</p>
-      <p>Preco: {{i.preco}}</p>
+      <p>Preco: {{i.preco | currency}}</p>
       <p>Total: {{i.preco * i.quantidade | currency}}</p>
     </ion-item>
   </ion-item-sliding>
@@ -32,9 +32,10 @@
   <ion-item-sliding *ngFor="let p of parcelas">
     <ion-item>
       <h2>Parcela: {{p.parcela }}</h2>
-      <p>Preco: {{p.preco}}</p>
+      <p>Preco: {{p.preco | currency}}</p>
       <p>Vencimento {{p.vencimento}}</p>
       <p>Status: {{p.status == 0? 'pendente' : 'pago'}}</p>
+      <button ion-button clear item-end (click)="pagar(p.id, p.preco)">Pagar</button>
     </ion-item>  
   </ion-item-sliding>
 </ion-content>

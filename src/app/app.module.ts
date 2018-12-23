@@ -17,6 +17,7 @@ import { PagamentoModalPageModule } from '../pages/pagamento-modal/pagamento-mod
 import { ParcelaDB } from '../providers/database/parceladb.';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { RelatorioDB } from '../providers/database/relatoriodb';
 
 registerLocaleData(localePt, 'pt');
 @NgModule({
@@ -44,7 +45,8 @@ registerLocaleData(localePt, 'pt');
     ClienteDB,
     CompraDB,
     ParcelaDB,
-    ItemDB
+    ItemDB,
+    RelatorioDB
   ]
 })
 export class AppModule {}

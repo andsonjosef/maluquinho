@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, Item, ModalController } from 'ionic-angular';
-import { ItemDTO } from '../../models/item.dto';
 import { CompraDB } from '../../providers/database/compradb';
 import { ItemDB } from '../../providers/database/itemdb';
 import { DatePipe } from '@angular/common';

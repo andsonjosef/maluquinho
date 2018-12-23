@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { SQLiteObject, SQLite } from '@ionic-native/sqlite';
-import { ClienteDTO } from '../../models/cliente.dto';
-import { CompraDTO } from '../../models/compra.dto';
 
 /*
   Generated class for the DatabaseProvider provider.

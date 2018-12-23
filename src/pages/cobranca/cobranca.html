@@ -25,7 +25,7 @@
     <ion-list *ngSwitchCase="'vencidos'">
       <ion-item *ngFor="let p of parcelasVencidas">
         <h2>Parcela: {{p.parcela }}</h2>
-        <p>Preco: {{p.preco}}</p>
+        <p>Preco: {{p.preco | currency}}</p>
         <p>Vencimento {{p.vencimento}}</p>
         <p>Status: {{p.status == 0? 'pendente' : 'pago'}}</p>
       </ion-item>
@@ -34,7 +34,7 @@
 
       <ion-item *ngFor="let p of parcelas">
         <h2>Parcela: {{p.parcela }}</h2>
-        <p>Preco: {{p.preco}}</p>
+        <p>Preco: {{p.preco | currency}}</p>
         <p>Vencimento {{p.vencimento}}</p>
         <p>Status: {{p.status == 0? 'pendente' : 'pago'}}</p>
       </ion-item>
@@ -43,7 +43,7 @@
     <ion-list *ngSwitchCase="'amanha'">
       <ion-item *ngFor="let p of parcelasAmanha">
         <h2>Parcela: {{p.parcela }}</h2>
-        <p>Preco: {{p.preco}}</p>
+        <p>Preco: {{p.preco | currency}}</p>
         <p>Vencimento {{p.vencimento}}</p>
         <p>Status: {{p.status == 0? 'pendente' : 'pago'}}</p>
       </ion-item>

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { ItemDB } from '../../providers/database/itemdb';
 import { ParcelaDB } from '../../providers/database/parceladb.';
+import { DatePipe } from '@angular/common';
+import { RelatorioDB } from '../../providers/database/relatoriodb';
 
 /**
  * Generated class for the DetalheCompraPage page.
@@ -19,11 +21,14 @@ export class DetalheCompraPage {
   id
   private itens: any;
   private parcelas: any;
+  relatorio;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private parceladb: ParcelaDB,
-    private itemdb: ItemDB) {
+    private itemdb: ItemDB,
+    private relatoriodb: RelatorioDB,
+    public alertCtrl: AlertController) {
   }
 
 
@@ -49,6 +54,41 @@ export class DetalheCompraPage {
       this.parcelas = data;
       console.log(data);
     }, (error) => {
+      console.log(error);
+    })
+  }
+
+  pagar(id: number, valor: any) {
+    let date = new Date();
+    let datePipe = new DatePipe('pt');
+    let formatade = datePipe.transform(date, 'dd-MM-yyyy');
+
+    this.parceladb.pagarParcela(id).then((data: any) => {
+      console.log(data);
+      this.relatorio = {
+        dtpagamento: formatade,
+        valor: valor,
+        idParcela: id
+      }
+      this.relatoriodb.inserir(this.relatorio).then((data: any) => {
+        console.log(data);
+
+      }, (error) => {
+        const alert = this.alertCtrl.create({
+          title: 'Erro!',
+          subTitle: 'Erro ao inserir no relatorio!',
+          buttons: ['OK']
+        });
+        alert.present();
+        console.log(error);
+      })
+    }, (error) => {
+      const alert = this.alertCtrl.create({
+        title: 'Erro!',
+        subTitle: 'Erro ao pagar!',
+        buttons: ['OK']
+      });
+      alert.present();
       console.log(error);
     })
   }

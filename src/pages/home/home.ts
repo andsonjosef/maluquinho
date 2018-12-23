@@ -20,4 +20,7 @@ export class HomePage {
   listarCliente() {
     this.navCtrl.push('ListarClientePage');
   }
+  relatorio() {
+    this.navCtrl.push('RelatorioPage');
+  }
 }
