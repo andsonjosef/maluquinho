@@ -78,8 +78,8 @@ export class CompraDB {
 
   cadastrarCompra(compra) {
     return new Promise((resolve, reject) => {
-      let sql = "INSERT INTO compra (dataCompra, qtdParcelas, primeiraParcela, idCliente ) VALUES (?,?,?,?)";
-      this.db.executeSql(sql, [compra.dataCompra, compra.qtdParcelas,  compra.primeiraParcela, compra.idCliente ]).then((data) => {
+      let sql = "INSERT INTO compra (dataCompra, qtdParcelas, primeiraParcela, idCliente, total ) VALUES (?,?,?,?,?)";
+      this.db.executeSql(sql, [compra.dataCompra, compra.qtdParcelas,  compra.primeiraParcela, compra.idCliente, compra.total ]).then((data) => {
         let  id = data.insertId;
         resolve(id);  
       }, (error) => {

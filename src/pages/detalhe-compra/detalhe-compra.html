@@ -6,14 +6,28 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>detalheCompra</ion-title>
+    <ion-title>Compra</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
+   <ion-item-sliding>
+    <ion-item>
+      <h2>{{cliente?.nome }}</h2>
+      <p>CPF: {{cliente?.cpf}}</p>
+      <p>RG: {{cliente?.rg}}</p>
+      <p>Bairro: {{cliente?.bairro}}</p>
+      <p>Número: {{cliente?.numero}}</p>
+      <p>Rua: {{cliente?.rua}}</p>
+      <p>Quadra: {{cliente?.quadra}}</p>
+      <p>Complemento: {{cliente?.complemento}}</p>
+      <p>Telefone: {{cliente?.telefone}}</p>
+    </ion-item>
+  </ion-item-sliding>
+
   <ion-item>
-    <h2>Itens</h2>
+    <h1>ITENS</h1>
   </ion-item>
 
   <ion-item-sliding *ngFor="let i of itens">
@@ -26,7 +40,7 @@
   </ion-item-sliding>
 
   <ion-item>
-    <h2>Parcelas</h2>
+    <h1>PARCELAS</h1>
   </ion-item>
 
   <ion-item-sliding *ngFor="let p of parcelas">

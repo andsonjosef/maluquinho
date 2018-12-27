@@ -28,11 +28,13 @@ export class RelatorioPage {
     console.log('ionViewDidLoad RelatorioPage');
     this.listarRelatorios();
   }
+  ionViewWillEnter() {
+    this.listarRelatorios();
+  }
 
   listarRelatorios() {
     this.relatoriodb.listarTodoRelatorio().then((data: any) => {
       this.relatorios = data;
-      console.log(data);
     }, (error) => {
       console.log(error);
     })

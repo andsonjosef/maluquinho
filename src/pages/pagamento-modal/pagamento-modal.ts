@@ -84,41 +84,27 @@ export class PagamentoModalPage {
     let datePipe = new DatePipe('en-US');
     let formatade = datePipe.transform(date, 'dd-MM-yyyy');
     let formatadep = datePipe.transform(this.compra.primeiraParcela, 'dd-MM-yyyy');
-    console.log("data esc for " + this.compra.primeiraParcela);
     this.compra.dataCompra = formatade;
     this.compra.total = this.final;
     this.compra.idCliente = this.clienteId;
-    console.log("this.compra");
 
-    console.log(this.compra);
     this.compradb.cadastrarCompra(this.compra).then((data: number) => {
-      console.log(data);
       this.compraId = data;
       for (let i = 0; i < this.itens.length; i++) {
-        console.log("this.itens[i]");
-
-        console.log(this.itens[i]);
         this.itens[i].idCompra = this.compraId;
         this.itemdb.cadastrarItem(this.itens[i]).then((data) => {
-          console.log(data);
-
-
         }, (error) => {
           console.log(error);
         })
       }
 
       for (let i = 0; i < this.compra.qtdParcelas; i++) {
-        console.log("(this.compra.primeiraParcela " + this.compra.primeiraParcela);
-
         let date = new Date(this.compra.primeiraParcela);
-        console.log("date " + date);
         var month = date.getMonth();
         date.setMonth(month + i);
         date.setDate(date.getDate() + 1);
-        let datePipe = new DatePipe('pt'); 
+        let datePipe = new DatePipe('pt');
         let formatade = datePipe.transform(date, 'yyyy-MM-dd');
-        console.log("formatade " + formatade);
         this.parcela = {
           id: 0,
           parcela: (i + 1) + "/" + this.compra.qtdParcelas,
@@ -126,14 +112,9 @@ export class PagamentoModalPage {
           preco: this.final / this.compra.qtdParcelas,
           idCompra: 0,
           vencimento: formatade
-
         }
-        console.log("this.parcela");
-
         this.parcela.idCompra = this.compraId;
-        console.log(this.parcela);
         this.parceladb.cadastrarParcela(this.parcela).then((data) => {
-          console.log(data);
         }, (error) => {
           console.log(error);
         })

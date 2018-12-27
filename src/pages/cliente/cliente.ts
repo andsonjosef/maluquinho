@@ -14,8 +14,8 @@ import { DatePipe } from '@angular/common';
 export class ClientePage {
   private listaCliente: any;
   private todo: FormGroup;
-  date = new Date();
-  cliente: ClienteDTO = {
+  private date = new Date();
+ private  cliente: ClienteDTO = {
     id: 0,
     nome: "",
     cpf: "",
@@ -36,7 +36,7 @@ export class ClientePage {
     private formBuilder: FormBuilder,
   ) {
     this.todo = this.formBuilder.group({
-      nome: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
+      nome: ['', Validators.required],
       cpf: ['', Validators.required],
       rg: ['', Validators.required],
       bairro: ['', Validators.required],
@@ -50,10 +50,8 @@ export class ClientePage {
   }
 
   cadastrarCliente() {
-    console.log(this.todo);
 
     this.database.cadastrarCliente(this.cliente).then((data) => {
-      console.log(data);
       const alert = this.alertCtrl.create({
         title: 'Novo cliente!',
         subTitle: 'Cliente cadastrado com sucesso!',

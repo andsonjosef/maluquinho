@@ -14,47 +14,52 @@
 
 <ion-content padding>
 
-
-
-
   <ion-list style="margin-bottom: 50px">
+    <form [formGroup]="todo" novalidate>
+      <ion-list *ngFor="let row of rows;let i=index">
 
-    <ion-list *ngFor="let row of rows;let i=index">
-      <ion-item>
-        <ion-label floating>Item</ion-label>
-        <ion-input [(ngModel)]="itemN[i]" id="item" name="item" required #item="ngModel" type="text"></ion-input>
-      </ion-item>
-      <span *ngIf="item.errors">
-        <span [hidden]="!item.errors.required">
-          <ion-label style="color: red; margin-left: 16px;"> Preemcha o campo item</ion-label>
-        </span>
-      </span>
+        <ion-item>
+          <ion-label floating>Item</ion-label>
+          <ion-input [(ngModel)]="itemN[i]" id="item" name="item" formControlName="item" type="text"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="todo.get('item').errors && todo.get('item').dirty">
+          <p color="danger" ion-text *ngIf="todo.get('item').hasError('required')"> Campo obrigatorio</p>
+        </ion-item>
 
-      <ion-item>
-        <ion-label floating>Quantidade</ion-label>
-        <ion-input [(ngModel)]="quantidades[i]" type="number"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Preço</ion-label>
-        <ion-input [(ngModel)]="precos[i] " type="number"></ion-input>
-      </ion-item>
-      <ion-item>
-        <p item-end>Total: {{precos[i] * quantidades[i] | currency}}</p>
-      </ion-item>
-      <ion-fab right>
-        <button ion-fab mini color="danger" (click)="removeRow(i)">
-          <ion-icon name="close"></ion-icon>
-        </button>
-      </ion-fab>
-    </ion-list>
+        <ion-item>
+          <ion-label floating>Quantidade</ion-label>
+          <ion-input formControlName="quantidade" [(ngModel)]="quantidades[i]" type="number"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="todo.get('quantidade').errors && todo.get('quantidade').dirty">
+          <p color="danger" ion-text *ngIf="todo.get('quantidade').hasError('required')"> Campo obrigatorio</p>
+        </ion-item>
 
-    <ion-fab>
-      <button ion-fab mini color="secondary" (click)="addRow()">
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-fab>
+        <ion-item>
+          <ion-label floating>Preço</ion-label>
+          <ion-input formControlName="preco" [(ngModel)]="precos[i] " type="number"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="todo.get('preco').errors && todo.get('preco').dirty">
+          <p color="danger" ion-text *ngIf="todo.get('preco').hasError('required')"> Campo obrigatorio</p>
+        </ion-item>
 
+        <ion-item>
+          <p item-end>Total: {{precos[i] * quantidades[i] | currency}}</p>
+        </ion-item>
+        <ion-fab right>
+          <button ion-fab mini color="danger" (click)="removeRow(i)">
+            <ion-icon name="close"></ion-icon>
+          </button>
+        </ion-fab>
 
+        <ion-fab>
+          <button ion-fab mini color="secondary" (click)="addRow()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+        </ion-fab>
+
+      </ion-list>
+      <button ion-button type="submit" (click)="openModal()" [disabled]="!todo.valid" style="margin-top: 80px">Pagamento</button>
+
+    </form>
   </ion-list>
-    <button style="margin-top: 40px" ion-button (click)="openModal()">Pagamento</button>
 </ion-content>

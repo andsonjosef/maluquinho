@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ClienteDB } from '../../providers/database/clientedb';
 
@@ -24,8 +24,7 @@ export class ListarClientePage {
     private database: ClienteDB
   ) {
   }
-
-
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListarClientePage');
     this.listarClientes();
@@ -36,7 +35,6 @@ export class ListarClientePage {
   }
   listarClientes() {
     this.database.listarClientes().then((data: any) => {
-      console.log(data);
       this.listaCliente = data;
     }, (error) => {
       console.log(error);
@@ -56,13 +54,11 @@ export class ListarClientePage {
 
     if (val && val.trim() != '') {
       this.database.listarClientesNome(val).then((data: any) => {
-        console.log(val);
-        console.log(data);
         this.listaCliente = data;
       }, (error) => {
         console.log(error);
       })
-    }else{
+    } else {
       this.listarClientes();
     }
   }

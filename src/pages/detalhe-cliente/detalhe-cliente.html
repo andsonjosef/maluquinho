@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>detalheCliente</ion-title>
+    <ion-title>{{cliente?.nome}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,7 +16,7 @@
 <ion-content padding>
   <ion-item-sliding>
     <ion-item>
-      <h2>{{cliente?.nome }}</h2>
+      <h2>{{cliente?.nome}}</h2>
       <p>CPF: {{cliente?.cpf}}</p>
       <p>RG: {{cliente?.rg}}</p>
       <p>Bairro: {{cliente?.bairro}}</p>
@@ -39,7 +39,7 @@
       <h2>Data: {{c.dataCompra }}</h2>
       <p>Valor: {{c.total}}</p>
       <p>Status: {{c.status == 0? 'pendente' : 'pago'}}</p>
-      <button ion-button clear item-end (click)="selecionarCompra(c.id)">Selecionar</button>
+      <button ion-button clear item-end (click)="selecionarCompra(c)">Selecionar</button>
     </ion-item>
 
     <ion-item-options side="right">

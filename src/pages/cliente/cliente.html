@@ -24,9 +24,6 @@
     </ion-item>
     <ion-item *n gIf="todo.get('nome').errors && todo.get('nome').dirty">
       <p color="danger" ion-text *ngIf="todo.get('nome').hasError('required')"> Campo obrigatorio</p>
-      <p color="danger" ion-text *ngIf="todo.get('nome').hasError('minlength')"> Quantidade minima de caracteres es (4)</p>
-      <p color="danger" ion-text *ngIf="todo.get('nome').hasError('maxlength')"> Quantidade maxima de caracteres es
-        (30)</p>
     </ion-item>
     <ion-item>
       <ion-label floating>CPF</ion-label>
