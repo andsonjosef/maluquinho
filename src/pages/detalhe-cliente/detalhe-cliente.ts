@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { ClienteDB } from '../../providers/database/clientedb';
 import { CompraDB } from '../../providers/database/compradb';
 import { ItemDB } from '../../providers/database/itemdb';
+import { EditarClientePage } from '../editar-cliente/editar-cliente';
 
 /**
  * Generated class for the DetalheClientePage page.
@@ -25,7 +26,8 @@ export class DetalheClientePage {
     public navParams: NavParams,
     private clientedb: ClienteDB,
     private compradb: CompraDB,
-    private itemdb: ItemDB) {
+    private itemdb: ItemDB,
+    public modalCtrl: ModalController,) {
   }
 
   ionViewWillEnter() {
@@ -51,6 +53,12 @@ export class DetalheClientePage {
     })
   }
 
+  editarCliente() {
+    let modal = this.modalCtrl.create(EditarClientePage, {cliente: this.cliente});
+    modal.present();
+   
+  }
+  
   selecionarCompra(compraS: any) {
     this.navCtrl.push('DetalheCompraPage', { compraS: compraS });
   }

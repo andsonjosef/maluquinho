@@ -44,6 +44,8 @@ export class ListarClientePage {
   selecionarCliente(id: string) {
     this.navCtrl.push('DetalheClientePage', { id: id });
   }
+
+  
   cadastrarCliente() {
     this.navCtrl.push('ClientePage');
   }

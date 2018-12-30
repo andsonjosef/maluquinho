@@ -18,6 +18,7 @@ import { ParcelaDB } from '../providers/database/parceladb.';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { RelatorioDB } from '../providers/database/relatoriodb';
+import { EditarClientePageModule } from '../pages/editar-cliente/editar-cliente.module';
 
 registerLocaleData(localePt, 'pt');
 @NgModule({
@@ -30,6 +31,8 @@ registerLocaleData(localePt, 'pt');
     BrowserModule,
     CurrencyMaskModule,
     PagamentoModalPageModule,
+    EditarClientePageModule,
+
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

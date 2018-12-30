@@ -1,21 +1,27 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { ClienteDB } from '../../providers/database/clientedb';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IonicPage, NavController, NavParams, AlertController, ViewController } from 'ionic-angular';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ClienteDTO } from '../../models/cliente.dto';
+import { ClienteDB } from '../../providers/database/clientedb';
 import { DatePipe } from '@angular/common';
 
+/**
+ * Generated class for the EditarClientePage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
 @IonicPage()
 @Component({
-  selector: 'page-cliente',
-  templateUrl: 'cliente.html',
+  selector: 'page-editar-cliente',
+  templateUrl: 'editar-cliente.html',
 })
-export class ClientePage {
+export class EditarClientePage {
   private listaCliente: any;
   private todo: FormGroup;
   private date = new Date();
- private  cliente: ClienteDTO = {
+  private cliente: ClienteDTO = {
     id: 0,
     nome: "",
     cpf: "",
@@ -34,6 +40,7 @@ export class ClientePage {
     public alertCtrl: AlertController,
     private database: ClienteDB,
     private formBuilder: FormBuilder,
+    public viewCtrl: ViewController,
   ) {
     this.todo = this.formBuilder.group({
       nome: ['', Validators.required],
@@ -49,13 +56,16 @@ export class ClientePage {
     });
   }
 
+  dismiss() {
+    this.viewCtrl.dismiss();
+  }
 
-  cadastrarCliente() {
+  editarCliente() {
 
-    this.database.cadastrarCliente(this.cliente).then((data) => {
+    this.database.editarCliente(this.cliente).then((data) => {
       const alert = this.alertCtrl.create({
         title: 'Novo cliente!',
-        subTitle: 'Cliente cadastrado com sucesso!',
+        subTitle: 'Cliente editado com sucesso!',
         buttons: ['OK']
       });
       alert.present();
@@ -64,7 +74,7 @@ export class ClientePage {
     }, (error) => {
       const alert = this.alertCtrl.create({
         title: 'Erro!',
-        subTitle: 'Erro ao cadastrar o cliente!',
+        subTitle: 'Erro ao editar o cliente!',
         buttons: ['OK']
       });
       alert.present();
@@ -74,6 +84,7 @@ export class ClientePage {
 
 
   ionViewDidLoad() {
+    this.cliente = this.navParams.get('cliente');
     console.log('ionViewDidLoad ClientePage');
   }
 
