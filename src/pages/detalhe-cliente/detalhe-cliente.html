@@ -31,21 +31,20 @@
   <ion-item>
     <h2>Compras</h2>
   </ion-item>
-  <ion-item>
-    <ion-col col-6>
-      <button ion-fab mini color="primary" (click)="novaCompra()">
-        <ion-icon name="md-cart"></ion-icon>
-      </button>
-
-    </ion-col>
-    <ion-col col-6>
-
-      <button ion-fab mini color="secundary" (click)="editarCliente()">
-        <ion-icon name="md-create"></ion-icon>
-      </button>
-
-    </ion-col>
-  </ion-item>
+  <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button ion-fab mini color="primary" (click)="novaCompra()">
+            <ion-icon name="md-cart"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-fab mini color="secondary" (click)="editarCliente()">
+            <ion-icon name="md-create"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   <ion-item-sliding *ngFor="let c of compras">
     <ion-item>
       <h2>Data: {{c.dataCompra }}</h2>

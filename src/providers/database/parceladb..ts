@@ -55,17 +55,34 @@ export class ParcelaDB {
 
   listarVencimentoDia(dataV) {
     return new Promise((resolve, reject) => {
-      this.db.executeSql("SELECT * FROM parcela where vencimento = ? and status = 0 ", [dataV]).then((data) => {
+      this.db.executeSql("SELECT * FROM parcela p, cliente c, compra co where c.id = co.idCliente and co.id = p.idCompra and p.vencimento = ? and p.status = 0 ", [dataV]).then((data) => {
         let arrayItens = [];
         if (data.rows.length > 0) {
           for (var i = 0; i < data.rows.length; i++) {
+
             arrayItens.push({
-              id: data.rows.item(i).id,
+              idParcela: data.rows.item(i).id,
               parcela: data.rows.item(i).parcela,
-              status: data.rows.item(i).status,
+              statusParcela: data.rows.item(i).status,
               preco: data.rows.item(i).preco,
               vencimento: data.rows.item(i).vencimento,
+              idCliente: data.rows.item(i).idCliente,
+              nome: data.rows.item(i).nome,
+              cpf: data.rows.item(i).cpf,
+              rg: data.rows.item(i).rg,
+              bairro: data.rows.item(i).bairro,
+              numero: data.rows.item(i).numero,
+              rua: data.rows.item(i).rua,
+              quadra: data.rows.item(i).quadra,
+              complemento: data.rows.item(i).complemento,
+              telefone: data.rows.item(i).telefone,
               idCompra: data.rows.item(i).idCompra,
+              dataCompra: data.rows.item(i).dataCompra,
+              statusCompra: data.rows.item(i).status1,
+              primeiraParcela: data.rows.item(i).primeiraParcela,
+              qtdParcelas: data.rows.item(i).qtdParcelas,
+              total: data.rows.item(i).total,
+
             });
           }
         }
@@ -118,17 +135,34 @@ export class ParcelaDB {
 
   listarParcelasAmanha(dataV) {
     return new Promise((resolve, reject) => {
-      this.db.executeSql("SELECT * FROM parcela where vencimento = ? and status = 0 ", [dataV]).then((data) => {
+      this.db.executeSql("SELECT * FROM parcela p, cliente c, compra co where c.id = co.idCliente and co.id = p.idCompra and p.vencimento = ? and p.status = 0 ", [dataV]).then((data) => {
         let arrayItens = [];
         if (data.rows.length > 0) {
           for (var i = 0; i < data.rows.length; i++) {
+
             arrayItens.push({
-              id: data.rows.item(i).id,
+              idParcela: data.rows.item(i).id,
               parcela: data.rows.item(i).parcela,
-              status: data.rows.item(i).status,
+              statusParcela: data.rows.item(i).status,
               preco: data.rows.item(i).preco,
               vencimento: data.rows.item(i).vencimento,
+              idCliente: data.rows.item(i).idCliente,
+              nome: data.rows.item(i).nome,
+              cpf: data.rows.item(i).cpf,
+              rg: data.rows.item(i).rg,
+              bairro: data.rows.item(i).bairro,
+              numero: data.rows.item(i).numero,
+              rua: data.rows.item(i).rua,
+              quadra: data.rows.item(i).quadra,
+              complemento: data.rows.item(i).complemento,
+              telefone: data.rows.item(i).telefone,
               idCompra: data.rows.item(i).idCompra,
+              dataCompra: data.rows.item(i).dataCompra,
+              statusCompra: data.rows.item(i).status1,
+              primeiraParcela: data.rows.item(i).primeiraParcela,
+              qtdParcelas: data.rows.item(i).qtdParcelas,
+              total: data.rows.item(i).total,
+
             });
           }
         }

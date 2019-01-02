@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { ClienteDB } from '../../providers/database/clientedb';
 import { CompraDB } from '../../providers/database/compradb';
@@ -67,3 +67,4 @@ export class DetalheClientePage {
     this.navCtrl.push('NovaCompraPage', { id: this.id });
   }
 }
+

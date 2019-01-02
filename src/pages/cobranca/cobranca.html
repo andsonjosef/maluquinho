@@ -34,29 +34,44 @@
         <h2>Parcela: {{p.parcela }}</h2>
         <p>Preco: {{p.preco | currency}}</p>
         <p>Vencimento {{p.vencimento}}</p>
+        <button ion-button clear item-end (click)="selecionarCompra(p.idCompra)">Selecionar</button>
       </ion-item>
       <ion-item>
-        <button ion-button clear item-end (click)="selecionarCompra(p.idCompra)">Selecionar</button>
+
       </ion-item>
 
     </ion-list>
     <ion-list *ngSwitchCase="'hoje'">
 
       <ion-item *ngFor="let p of parcelas">
+        <h2>{{p?.nome}}</h2>
+        <p>Bairro: {{p?.bairro}}</p>
+        <p>Número: {{p?.numero}}</p>
+        <p>Rua: {{p?.rua}}</p>
+        <p>Quadra: {{p?.quadra}}</p>
+        <p>Complemento: {{p?.complemento}}</p>
+        <p>Telefone: {{p?.telefone}}</p>
         <h2>Parcela: {{p.parcela }}</h2>
         <p>Preco: {{p.preco | currency}}</p>
         <p>Vencimento {{p.vencimento}}</p>
-        <p>Status: {{p.status == 0? 'pendente' : 'pago'}}</p>
+        <button ion-button clear item-end (click)="selecionarCompra(p.idCompra)">Selecionar</button>
       </ion-item>
 
     </ion-list>
 
     <ion-list *ngSwitchCase="'amanha'">
       <ion-item *ngFor="let p of parcelasAmanha">
+        <h2>{{p?.nome}}</h2>
+        <p>Bairro: {{p?.bairro}}</p>
+        <p>Número: {{p?.numero}}</p>
+        <p>Rua: {{p?.rua}}</p>
+        <p>Quadra: {{p?.quadra}}</p>
+        <p>Complemento: {{p?.complemento}}</p>
+        <p>Telefone: {{p?.telefone}}</p>
         <h2>Parcela: {{p.parcela }}</h2>
         <p>Preco: {{p.preco | currency}}</p>
         <p>Vencimento {{p.vencimento}}</p>
-        <p>Status: {{p.status == 0? 'pendente' : 'pago'}}</p>
+        <button ion-button clear item-end (click)="selecionarCompra(p.idCompra)">Selecionar</button>
       </ion-item>
 
     </ion-list>

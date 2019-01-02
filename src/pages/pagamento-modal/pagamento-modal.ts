@@ -6,6 +6,7 @@ import { ParcelaDB } from '../../providers/database/parceladb.';
 import { CompraDB } from '../../providers/database/compradb';
 import { ItemDB } from '../../providers/database/itemdb';
 import { parseDate } from 'ionic-angular/umd/util/datetime-util';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 /**
  * Generated class for the PagamentoModalPage page.
@@ -20,7 +21,7 @@ import { parseDate } from 'ionic-angular/umd/util/datetime-util';
   templateUrl: 'pagamento-modal.html',
 })
 export class PagamentoModalPage {
-  compra = {
+ private compra = {
     id: "",
     idCliente: "",
     dataCompra: "",
@@ -30,7 +31,7 @@ export class PagamentoModalPage {
     total: 0,
   }
 
-  item = {
+ private item = {
     id: 0,
     item: "",
     quantidade: 0,
@@ -39,7 +40,7 @@ export class PagamentoModalPage {
     total: 0,
   }
 
-  parcela = {
+ private parcela = {
     id: 0,
     parcela: "",
     status: 0,
@@ -47,12 +48,14 @@ export class PagamentoModalPage {
     idCompra: 0,
     vencimento: ""
   }
-  itens: any[] = [];
-  clienteId;
-  compraId;
-  total: number = 0;
-  desconto: number = 0;
-  final: number = 0;
+  private itens: any[] = [];
+  private clienteId;
+  private compraId;
+  private total: number = 0;
+  private desconto: number = 0;
+  private final: number = 0;
+  private todo: FormGroup;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -61,7 +64,13 @@ export class PagamentoModalPage {
     public alertCtrl: AlertController,
     private itemdb: ItemDB,
     private parceladb: ParcelaDB,
+    private formBuilder: FormBuilder,
   ) {
+    this.todo = this.formBuilder.group({
+      desconto: ['', Validators.required],
+      parcelas: ['', Validators.required],
+      dataprimeira: ['', Validators.required],
+    });
   }
 
   dismiss() {

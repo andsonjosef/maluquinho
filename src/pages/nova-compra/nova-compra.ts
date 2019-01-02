@@ -4,7 +4,6 @@ import { CompraDB } from '../../providers/database/compradb';
 import { ItemDB } from '../../providers/database/itemdb';
 import { DatePipe } from '@angular/common';
 import { PagamentoModalPage } from '../pagamento-modal/pagamento-modal';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 /**
  * Generated class for the NovaCompraPage page.
@@ -38,6 +37,7 @@ export class NovaCompraPage {
 
   }
 
+  private valid: boolean;
   private itemN: string[] = []
   private quantidades: number[] = []
   private precos: number[] = []
@@ -47,7 +47,6 @@ export class NovaCompraPage {
   private itens: any[] = [];
   private clienteId;
   private total: number = 0;
-  private todo: FormGroup;
 
   constructor(
     public modalCtrl: ModalController,
@@ -56,16 +55,7 @@ export class NovaCompraPage {
     private compradb: CompraDB,
     public alertCtrl: AlertController,
     private itemdb: ItemDB,
-    private formBuilder: FormBuilder,
   ) {
-
-    this.todo = this.formBuilder.group({
-      
-      item: ['', Validators.required],
-      quantidade: ['', Validators.required],
-      preco: ['', Validators.required],
-    });
-
     this.rows = [false];
   }
 
@@ -128,30 +118,65 @@ export class NovaCompraPage {
     })
     this.compra.dataCompra
   }
-
   openModal() {
+    this.valid = true;
 
-    this.total = 0;
-    let i = 0;
-    while (i < this.rows.length) {
-      this.item = {
-        id: 0,
-        item: this.itemN[i],
-        quantidade: this.quantidades[i],
-        preco: this.precos[i],
-        idCompra: 0,
-        total: this.quantidades[i] * this.precos[i],
+    for (let i = 0; i < this.rows.length; i++) {
 
+      if (this.itemN[i] == '' || this.itemN[i] == null) {
+        this.valid = false;
+        const alert = this.alertCtrl.create({
+          title: 'Campo vazio!',
+          subTitle: 'Preencha o(s) campo(s) de item!',
+          buttons: ['OK']
+        });
+        alert.present();
+        break;
       }
-      this.total = this.total + (this.quantidades[i] * this.precos[i])
-
-      this.itens[i] = this.item;
-      i++;
+      if (this.quantidades[i] == 0 || this.quantidades[i] == null) {
+        this.valid = false;
+        const alert = this.alertCtrl.create({
+          title: 'Campo vazio!',
+          subTitle: 'Preencha o(s) campo(s) de quantidade!',
+          buttons: ['OK']
+        });
+        alert.present();
+        break;
+      }
+      if (this.precos[i] == 0 || this.precos[i] == null) {
+        this.valid = false;
+        const alert = this.alertCtrl.create({
+          title: 'Campo vazio!',
+          subTitle: 'Preencha o(s) campo(s) de preco!',
+          buttons: ['OK']
+        });
+        alert.present();
+        break;
+      }
     }
+    if (this.valid == true) {
+      this.total = 0;
+      let i = 0;
+      while (i < this.rows.length) {
+        this.item = {
+          id: 0,
+          item: this.itemN[i],
+          quantidade: this.quantidades[i],
+          preco: this.precos[i],
+          idCompra: 0,
+          total: this.quantidades[i] * this.precos[i],
+
+        }
+        this.total = this.total + (this.quantidades[i] * this.precos[i])
+
+        this.itens[i] = this.item;
+        i++;
+      }
 
 
-    let modal = this.modalCtrl.create(PagamentoModalPage, { total: this.total, itens: this.itens, clienteId: this.clienteId });
-    modal.present();
+      let modal = this.modalCtrl.create(PagamentoModalPage, { total: this.total, itens: this.itens, clienteId: this.clienteId });
+      modal.present();
+    }
   }
 
 }

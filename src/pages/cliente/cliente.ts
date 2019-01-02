@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { ClienteDB } from '../../providers/database/clientedb';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClienteDTO } from '../../models/cliente.dto';
-import { DatePipe } from '@angular/common';
 
 
 @IonicPage()
@@ -15,7 +14,7 @@ export class ClientePage {
   private listaCliente: any;
   private todo: FormGroup;
   private date = new Date();
- private  cliente: ClienteDTO = {
+  private cliente: ClienteDTO = {
     id: 0,
     nome: "",
     cpf: "",

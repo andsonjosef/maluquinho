@@ -22,7 +22,7 @@
       <ion-label floating>Nome</ion-label>
       <ion-input [(ngModel)]="cliente.nome" type="text" formControlName="nome"></ion-input>
     </ion-item>
-    <ion-item *n gIf="todo.get('nome').errors && todo.get('nome').dirty">
+    <ion-item *ngIf="todo.get('nome').errors && todo.get('nome').dirty">
       <p color="danger" ion-text *ngIf="todo.get('nome').hasError('required')"> Campo obrigatorio</p>
     </ion-item>
     <ion-item>
