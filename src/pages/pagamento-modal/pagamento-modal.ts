@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController, ToastController } from 'ionic-angular';
 import { ItemDTO } from '../../models/item.dto';
 import { DatePipe } from '@angular/common';
 import { ParcelaDB } from '../../providers/database/parceladb.';
@@ -57,6 +57,7 @@ export class PagamentoModalPage {
   private todo: FormGroup;
 
   constructor(
+    public toastCtrl: ToastController,
     public navCtrl: NavController,
     public navParams: NavParams,
     public viewCtrl: ViewController,
@@ -129,21 +130,22 @@ export class PagamentoModalPage {
         })
       }
 
-      const alert = this.alertCtrl.create({
-        title: 'Nova compra!',
-        subTitle: 'Compra cadastrada com sucesso!',
-        buttons: ['OK']
-      });
-      alert.present();
       this.navCtrl.setRoot('DetalheClientePage', { id: this.clienteId });
-
-    }, (error) => {
-      const alert = this.alertCtrl.create({
-        title: 'Erro!',
-        subTitle: 'Erro ao cadastrar a compra!',
-        buttons: ['OK']
+      let toast = this.toastCtrl.create({
+        message: 'Compra cadastrada com sucesso.',
+        duration: 2000,
+        position: 'top'
       });
-      alert.present();
+  
+      toast.present(toast);
+    }, (error) => {
+      let toast = this.toastCtrl.create({
+        message: 'Erro ao cadastrar a compra.',
+        duration: 2000,
+        position: 'top'
+      });
+  
+      toast.present(toast);
       console.log(error);
     })
     this.compra.dataCompra

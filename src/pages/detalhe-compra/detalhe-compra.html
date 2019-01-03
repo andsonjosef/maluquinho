@@ -47,9 +47,9 @@
     <ion-item>
       <h2>Parcela: {{p.parcela }}</h2>
       <p>Preco: {{p.preco | currency}}</p>
-      <p>Vencimento {{p.vencimento}}</p>
+      <p>Vencimento {{p.vencimento | date: 'dd/MM/yyyy'}}</p>
       <p>Status: {{p.status == 0? 'pendente' : 'pago'}}</p>
-      <button ion-button clear item-end (click)="pagar(p.id, p.preco)">Pagar</button>
+      <button *ngIf="p.status == 0" ion-button clear item-end (click)="pagar(p.id, p.preco)">Pagar</button>
     </ion-item>  
   </ion-item-sliding>
 </ion-content>

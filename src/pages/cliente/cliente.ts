@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { ClienteDB } from '../../providers/database/clientedb';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClienteDTO } from '../../models/cliente.dto';
@@ -27,10 +27,9 @@ export class ClientePage {
     telefone: ""
   };
 
-
   constructor(public navCtrl: NavController,
+    public toastCtrl: ToastController,
     public navParams: NavParams,
-    public alertCtrl: AlertController,
     private database: ClienteDB,
     private formBuilder: FormBuilder,
   ) {
@@ -52,21 +51,23 @@ export class ClientePage {
   cadastrarCliente() {
 
     this.database.cadastrarCliente(this.cliente).then((data) => {
-      const alert = this.alertCtrl.create({
-        title: 'Novo cliente!',
-        subTitle: 'Cliente cadastrado com sucesso!',
-        buttons: ['OK']
-      });
-      alert.present();
       this.navCtrl.push('ListarClientePage');
+      let toast = this.toastCtrl.create({
+        message: 'Cliente cadastrado com sucesso.',
+        duration: 2000,
+        position: 'top'
+      });
+  
+      toast.present(toast);
 
     }, (error) => {
-      const alert = this.alertCtrl.create({
-        title: 'Erro!',
-        subTitle: 'Erro ao cadastrar o cliente!',
-        buttons: ['OK']
+      let toast = this.toastCtrl.create({
+        message: 'Erro ao cadastrar o cliente.',
+        duration: 2000,
+        position: 'top'
       });
-      alert.present();
+  
+      toast.present(toast);
       console.log(error);
     })
   }

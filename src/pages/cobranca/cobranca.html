@@ -33,7 +33,7 @@
         <p>Telefone: {{p?.telefone}}</p>
         <h2>Parcela: {{p.parcela }}</h2>
         <p>Preco: {{p.preco | currency}}</p>
-        <p>Vencimento {{p.vencimento}}</p>
+        <p>Vencimento {{p.vencimento | date: 'dd/MM/yyyy'}}</p>
         <button ion-button clear item-end (click)="selecionarCompra(p.idCompra)">Selecionar</button>
       </ion-item>
       <ion-item>
@@ -53,7 +53,7 @@
         <p>Telefone: {{p?.telefone}}</p>
         <h2>Parcela: {{p.parcela }}</h2>
         <p>Preco: {{p.preco | currency}}</p>
-        <p>Vencimento {{p.vencimento}}</p>
+        <p>Vencimento {{p.vencimento | date: 'dd/MM/yyyy'}}</p>
         <button ion-button clear item-end (click)="selecionarCompra(p.idCompra)">Selecionar</button>
       </ion-item>
 
@@ -70,7 +70,7 @@
         <p>Telefone: {{p?.telefone}}</p>
         <h2>Parcela: {{p.parcela }}</h2>
         <p>Preco: {{p.preco | currency}}</p>
-        <p>Vencimento {{p.vencimento}}</p>
+        <p>Vencimento {{p.vencimento | date: 'dd/MM/yyyy'}}</p>
         <button ion-button clear item-end (click)="selecionarCompra(p.idCompra)">Selecionar</button>
       </ion-item>
 

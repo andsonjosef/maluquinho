@@ -47,8 +47,8 @@
     </ion-grid>
   <ion-item-sliding *ngFor="let c of compras">
     <ion-item>
-      <h2>Data: {{c.dataCompra }}</h2>
-      <p>Valor: {{c.total}}</p>
+      <h2>Data: {{c.dataCompra | date: 'dd/MM/yyyy' }}</h2>
+      <p>Valor: {{c.total | currency }}</p>
       <p>Status: {{c.status == 0? 'pendente' : 'pago'}}</p>
       <button ion-button clear item-end (click)="selecionarCompra(c)">Selecionar</button>
     </ion-item>

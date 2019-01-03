@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ClienteDTO } from '../../models/cliente.dto';
 import { ClienteDB } from '../../providers/database/clientedb';
-import { DatePipe } from '@angular/common';
 
 /**
  * Generated class for the EditarClientePage page.
@@ -36,8 +35,8 @@ export class EditarClientePage {
 
 
   constructor(public navCtrl: NavController,
+    public toastCtrl: ToastController,
     public navParams: NavParams,
-    public alertCtrl: AlertController,
     private database: ClienteDB,
     private formBuilder: FormBuilder,
     public viewCtrl: ViewController,
@@ -63,21 +62,24 @@ export class EditarClientePage {
   editarCliente() {
 
     this.database.editarCliente(this.cliente).then((data) => {
-      const alert = this.alertCtrl.create({
-        title: 'Novo cliente!',
-        subTitle: 'Cliente editado com sucesso!',
-        buttons: ['OK']
-      });
-      alert.present();
+     
       this.navCtrl.push('ListarClientePage');
+      let toast = this.toastCtrl.create({
+        message: 'Cliente editado com sucesso.',
+        duration: 2000,
+        position: 'top'
+      });
+  
+      toast.present(toast);
 
     }, (error) => {
-      const alert = this.alertCtrl.create({
-        title: 'Erro!',
-        subTitle: 'Erro ao editar o cliente!',
-        buttons: ['OK']
+      let toast = this.toastCtrl.create({
+        message: 'Erro ao editar o cliente.',
+        duration: 2000,
+        position: 'top'
       });
-      alert.present();
+  
+      toast.present(toast);
       console.log(error);
     })
   }

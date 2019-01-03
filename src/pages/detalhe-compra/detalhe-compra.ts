@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { ItemDB } from '../../providers/database/itemdb';
 import { ParcelaDB } from '../../providers/database/parceladb.';
 import { DatePipe } from '@angular/common';
@@ -26,6 +26,8 @@ export class DetalheCompraPage {
 
   relatorio;
   constructor(
+    public toastCtrl: ToastController,
+    public alerCtrl: AlertController,
     public navCtrl: NavController,
     public navParams: NavParams,
     private parceladb: ParcelaDB,
@@ -75,35 +77,72 @@ export class DetalheCompraPage {
   }
 
   pagar(id: number, valor: any) {
-    let date = new Date();
-    let datePipe = new DatePipe('pt');
-    let formatade = datePipe.transform(date, 'dd-MM-yyyy');
 
-    this.parceladb.pagarParcela(id).then((data: any) => {
-      this.relatorio = {
-        dtpagamento: formatade,
-        valor: valor,
-        idParcela: id
-      }
-      this.relatoriodb.inserir(this.relatorio).then((data: any) => {
+    let confirm = this.alerCtrl.create({
+      title: 'Pagar',
+      message: 'Você realmente deseja pagar essa parcela?',
+      buttons: [
+        {
+          text: 'Não',
+          handler: () => {
+          }
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            let date = new Date();
+            let datePipe = new DatePipe('pt');
+            let formatade = datePipe.transform(date, 'dd-MM-yyyy');
 
-      }, (error) => {
-        const alert = this.alertCtrl.create({
-          title: 'Erro!',
-          subTitle: 'Erro ao inserir no relatorio!',
-          buttons: ['OK']
-        });
-        alert.present();
-        console.log(error);
-      })
-    }, (error) => {
-      const alert = this.alertCtrl.create({
-        title: 'Erro!',
-        subTitle: 'Erro ao pagar!',
-        buttons: ['OK']
-      });
-      alert.present();
-      console.log(error);
-    })
+            this.parceladb.pagarParcela(id).then((data: any) => {
+              this.relatorio = {
+                dtpagamento: formatade,
+                valor: valor,
+                idParcela: id
+              }
+              this.relatoriodb.inserir(this.relatorio).then((data: any) => {
+
+              }, (error) => {
+                let toast = this.toastCtrl.create({
+                  message: 'Erro ao cadastrar o relatorio.',
+                  duration: 2000,
+                  position: 'top'
+                });
+            
+                toast.present(toast);
+                console.log(error);
+              })
+              let toast = this.toastCtrl.create({
+                message: 'Parcela paga',
+                duration: 2000,
+                position: 'top'
+              });
+          
+              toast.present(toast);
+            }, (error) => {
+              let toast = this.toastCtrl.create({
+                message: 'Erro ao efetuar o pagamento.',
+                duration: 2000,
+                position: 'top'
+              });
+          
+              toast.present(toast);
+              console.log(error);
+            })
+            this.listarParcelas(this.compra.id);
+            let toast = this.toastCtrl.create({
+              message: 'Parcela paga.',
+              duration: 2000,
+              position: 'top'
+            });
+        
+            toast.present(toast);
+
+          }
+        }
+       
+      ]
+    });
+    confirm.present()
   }
 }
