@@ -49,7 +49,12 @@
       <p>Preco: {{p.preco | currency}}</p>
       <p>Vencimento {{p.vencimento | date: 'dd/MM/yyyy'}}</p>
       <p>Status: {{p.status == 0? 'pendente' : 'pago'}}</p>
-      <button *ngIf="p.status == 0" ion-button clear item-end (click)="pagar(p.id, p.preco)">Pagar</button>
+      <button *ngIf="p.status == 0" ion-fab mini (click)="selecionarData(p)">
+        <ion-icon name="md-create"></ion-icon>
+      </button>
+        <button *ngIf="p.status == 0" ion-fab mini color="secondary"  (click)="pagar(p.id, p.preco)">
+          <ion-icon name="logo-usd"></ion-icon>
+        </button>
     </ion-item>  
   </ion-item-sliding>
 </ion-content>

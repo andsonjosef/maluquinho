@@ -76,6 +76,7 @@ export class DetalheCompraPage {
     })
   }
 
+  
   pagar(id: number, valor: any) {
 
     let confirm = this.alerCtrl.create({
@@ -108,7 +109,7 @@ export class DetalheCompraPage {
                   duration: 2000,
                   position: 'top'
                 });
-            
+
                 toast.present(toast);
                 console.log(error);
               })
@@ -117,7 +118,7 @@ export class DetalheCompraPage {
                 duration: 2000,
                 position: 'top'
               });
-          
+
               toast.present(toast);
             }, (error) => {
               let toast = this.toastCtrl.create({
@@ -125,7 +126,7 @@ export class DetalheCompraPage {
                 duration: 2000,
                 position: 'top'
               });
-          
+
               toast.present(toast);
               console.log(error);
             })
@@ -135,14 +136,62 @@ export class DetalheCompraPage {
               duration: 2000,
               position: 'top'
             });
-        
+
             toast.present(toast);
 
           }
         }
-       
+
       ]
     });
     confirm.present()
+  }
+
+  selecionarData(p) {
+    let alert = this.alertCtrl.create();
+    alert.setTitle('Lightsaber color');
+
+    alert.addInput({
+      name: 'date',
+      type: 'date',
+      value: p.vencimento
+    });
+
+    alert.addButton('Cancelar');
+    alert.addButton({
+      text: 'Confirmar',
+      handler: data => {
+        console.log(data.date);
+        p.vencimento = data.date;
+        this.editarParcela(p);
+      }
+    });
+    alert.present();
+  }
+
+  editarParcela(p) {
+    console.log(p);
+    this.parceladb.editarParcela(p).then((data) => {
+      this.listarItens(this.compra.id);
+      this.listarParcelas(this.compra.id);
+      let toast = this.toastCtrl.create({
+        message: 'Data alterada.',
+        duration: 2000,
+        position: 'top'
+      });
+
+      toast.present(toast);
+
+    }, (error) => {
+      console.log(error);
+      let toast = this.toastCtrl.create({
+        message: 'Erro ao alterar a data.',
+        duration: 2000,
+        position: 'top'
+      });
+
+      toast.present(toast);
+      
+    })
   }
 }

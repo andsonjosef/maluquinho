@@ -185,6 +185,18 @@ export class ParcelaDB {
     });
   }
 
+  editarParcela(parcela) {
+    return new Promise((resolve, reject) => {
+      let sql = "UPDATE parcela SET vencimento = ?  WHERE id = ?";
+      this.db.executeSql(sql, [parcela.vencimento, parcela.id]).then((data) => {
+        resolve(data);
+      
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
+
   pagarParcela(id) {
     return new Promise((resolve, reject) => {
       let sql = "UPDATE parcela SET status = 1 WHERE id = ?";

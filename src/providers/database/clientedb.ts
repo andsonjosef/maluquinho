@@ -36,7 +36,6 @@ export class ClienteDB {
       this.db.executeSql(sql, [cliente.nome, cliente.cpf, cliente.rg, cliente.bairro, cliente.numero, cliente.rua, cliente.quadra, cliente.complemento, cliente.telefone]).then((data) => {
         resolve(data);
         let id = data.insertId;
-        console.log("id last " + id);
       }, (error) => {
         reject(error);
       });
@@ -48,8 +47,7 @@ export class ClienteDB {
       let sql = "UPDATE cliente SET nome = ?, cpf = ?, rg = ?, bairro = ?, numero = ? , rua = ?, quadra = ?, complemento = ?, telefone = ? WHERE id = ?";
       this.db.executeSql(sql, [cliente.nome, cliente.cpf, cliente.rg, cliente.bairro, cliente.numero, cliente.rua, cliente.quadra, cliente.complemento, cliente.telefone, cliente.id]).then((data) => {
         resolve(data);
-        let id = data.insertId;
-        console.log("id last " + id);
+      
       }, (error) => {
         reject(error);
       });
