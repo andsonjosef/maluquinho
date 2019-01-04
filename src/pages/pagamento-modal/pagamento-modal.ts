@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, AlertController, ToastController } from 'ionic-angular';
-import { ItemDTO } from '../../models/item.dto';
 import { DatePipe } from '@angular/common';
 import { ParcelaDB } from '../../providers/database/parceladb.';
 import { CompraDB } from '../../providers/database/compradb';
 import { ItemDB } from '../../providers/database/itemdb';
-import { parseDate } from 'ionic-angular/umd/util/datetime-util';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 /**

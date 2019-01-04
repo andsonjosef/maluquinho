@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RelatorioDB } from '../../providers/database/relatoriodb';
+import { DatePipe } from '@angular/common';
 
 /**
  * Generated class for the RelatorioPage page.
@@ -16,7 +17,8 @@ import { RelatorioDB } from '../../providers/database/relatoriodb';
 })
 export class RelatorioPage {
   private relatorios: any;
-
+  private inicio: Date;
+  private fim: Date;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -34,6 +36,20 @@ export class RelatorioPage {
 
   listarRelatorios() {
     this.relatoriodb.listarTodoRelatorio().then((data: any) => {
+      this.relatorios = data;
+    }, (error) => {
+      console.log(error);
+    })
+  }
+
+  filtrar() {
+    let dateInicio = new Date(this.inicio);
+    let dateFim = new Date(this.fim);
+    let datePipe = new DatePipe('pt');
+    let inicioformatado = datePipe.transform(dateInicio, 'yyyy-MM-dd');
+    let fimformatado = datePipe.transform(dateFim, 'yyyy-MM-dd');
+
+    this.relatoriodb.listarRelatorioFiltrado(inicioformatado, fimformatado).then((data: any) => {
       this.relatorios = data;
     }, (error) => {
       console.log(error);

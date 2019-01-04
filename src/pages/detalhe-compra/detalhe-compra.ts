@@ -92,7 +92,7 @@ export class DetalheCompraPage {
           handler: () => {
             let date = new Date();
             let datePipe = new DatePipe('pt');
-            let formatade = datePipe.transform(date, 'dd-MM-yyyy');
+            let formatade = datePipe.transform(date, 'yyyy-MM-dd');
 
             this.parceladb.pagarParcela(id).then((data: any) => {
               this.relatorio = {

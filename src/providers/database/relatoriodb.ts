@@ -51,6 +51,27 @@ export class RelatorioDB {
     })
   }
 
+  listarRelatorioFiltrado(inicio, fim) {
+    return new Promise((resolve, reject) => {
+      this.db.executeSql("SELECT * FROM Relatorio WHERE dtpagamento BETWEEN ? and ?", [inicio, fim]).then((data) => {
+        let arrayItens = [];
+        if (data.rows.length > 0) {
+          for (var i = 0; i < data.rows.length; i++) {
+            arrayItens.push({
+              id: data.rows.item(i).id,
+              dtpagamento: data.rows.item(i).dtpagamento,
+              valor: data.rows.item(i).valor,
+              idParcela: data.rows.item(i).idParcela,
+
+            });
+          }
+        }
+        resolve(arrayItens);
+      }, (error) => {
+        reject(error);
+      })
+    })
+  }
 
   inserir(relatorio) {
     return new Promise((resolve, reject) => {

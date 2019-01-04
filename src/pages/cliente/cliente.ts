@@ -13,7 +13,6 @@ import { ClienteDTO } from '../../models/cliente.dto';
 export class ClientePage {
   private listaCliente: any;
   private todo: FormGroup;
-  private date = new Date();
   private cliente: ClienteDTO = {
     id: 0,
     nome: "",

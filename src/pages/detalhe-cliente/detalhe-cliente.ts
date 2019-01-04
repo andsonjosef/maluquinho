@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { ClienteDB } from '../../providers/database/clientedb';
 import { CompraDB } from '../../providers/database/compradb';
-import { ItemDB } from '../../providers/database/itemdb';
 import { EditarClientePage } from '../editar-cliente/editar-cliente';
 
 /**
@@ -26,7 +25,6 @@ export class DetalheClientePage {
     public navParams: NavParams,
     private clientedb: ClienteDB,
     private compradb: CompraDB,
-    private itemdb: ItemDB,
     public modalCtrl: ModalController,) {
   }
 
