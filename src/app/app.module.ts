@@ -19,6 +19,7 @@ import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { RelatorioDB } from '../providers/database/relatoriodb';
 import { EditarClientePageModule } from '../pages/editar-cliente/editar-cliente.module';
+import { SQLitePorter } from '@ionic-native/sqlite-porter';
 
 registerLocaleData(localePt, 'pt');
 @NgModule({
@@ -32,7 +33,6 @@ registerLocaleData(localePt, 'pt');
     CurrencyMaskModule,
     PagamentoModalPageModule,
     EditarClientePageModule,
-
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -42,6 +42,7 @@ registerLocaleData(localePt, 'pt');
   providers: [
     StatusBar,
     SQLite,
+    SQLitePorter,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     { provide: LOCALE_ID, useValue: 'pt' },

@@ -84,5 +84,17 @@ export class RelatorioDB {
       });
     });
   }
+
+  apagar(id) {
+    return new Promise((resolve, reject) => {
+      let sql = "DELETE FROM Relatorio where idParcela = ?";
+      this.db.executeSql(sql, [id]).then((data) => {
+        resolve(data);
+       
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
 }
 

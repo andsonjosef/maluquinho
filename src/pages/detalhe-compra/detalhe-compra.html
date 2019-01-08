@@ -12,7 +12,7 @@
 
 <ion-content padding>
 
-   <ion-item-sliding>
+  <ion-item-sliding>
     <ion-item>
       <h2>{{cliente?.nome }}</h2>
       <p>CPF: {{cliente?.cpf}}</p>
@@ -49,12 +49,25 @@
       <p>Preco: {{p.preco | currency}}</p>
       <p>Vencimento {{p.vencimento | date: 'dd/MM/yyyy'}}</p>
       <p>Status: {{p.status == 0? 'pendente' : 'pago'}}</p>
-      <button *ngIf="p.status == 0" ion-fab mini (click)="selecionarData(p)">
-        <ion-icon name="md-create"></ion-icon>
-      </button>
-        <button *ngIf="p.status == 0" ion-fab mini color="secondary"  (click)="pagar(p.id, p.preco)">
-          <ion-icon name="logo-usd"></ion-icon>
-        </button>
-    </ion-item>  
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <button *ngIf="p.status == 0" ion-fab mini (click)="selecionarData(p)">
+              <ion-icon name="md-create"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button *ngIf="p.status == 0" ion-fab mini color="secondary" (click)="pagar(p.id, p.preco)">
+              <ion-icon name="logo-usd"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
   </ion-item-sliding>
+
+  <button ion-button block color="danger" icon-end (click)="apagar()">Apagar compra
+    <ion-icon name="md-trash"></ion-icon>
+  </button>
 </ion-content>

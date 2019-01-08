@@ -5,6 +5,7 @@ import { ParcelaDB } from '../../providers/database/parceladb.';
 import { DatePipe } from '@angular/common';
 import { RelatorioDB } from '../../providers/database/relatoriodb';
 import { ClienteDB } from '../../providers/database/clientedb';
+import { CompraDB } from '../../providers/database/compradb';
 
 /**
  * Generated class for the DetalheCompraPage page.
@@ -33,6 +34,7 @@ export class DetalheCompraPage {
     private parceladb: ParcelaDB,
     private itemdb: ItemDB,
     private clientedb: ClienteDB,
+    private compradb: CompraDB,
     private relatoriodb: RelatorioDB,
     public alertCtrl: AlertController) {
   }
@@ -76,7 +78,39 @@ export class DetalheCompraPage {
     })
   }
 
-  
+  apagar() {
+    
+    let confirm = this.alerCtrl.create({
+      title: 'Pagar',
+      message: 'Você realmente deseja apagar essa Compra?',
+      buttons: [
+        {
+          text: 'Não',
+          handler: () => {
+          }
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            console.log("tamanho " + this.parcelas.length)
+            for (let i = 0; i < this.parcelas.length; i++) {
+              if (this.parcelas[i].status == 1) {
+                this.relatoriodb.apagar(this.parcelas[i].id)
+              }
+            }
+            this.parceladb.apagar(this.compra.id)
+            this.itemdb.apagar(this.compra.id)
+            this.compradb.apagar(this.compra.id)
+            this.navCtrl.push('DetalheClientePage', { id: this.cliente.id });
+
+
+          }
+        }
+
+      ]
+    });
+    confirm.present()
+  }
   pagar(id: number, valor: any) {
 
     let confirm = this.alerCtrl.create({
@@ -191,7 +225,7 @@ export class DetalheCompraPage {
       });
 
       toast.present(toast);
-      
+
     })
   }
 }

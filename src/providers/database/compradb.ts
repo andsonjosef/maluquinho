@@ -87,5 +87,17 @@ export class CompraDB {
       });
     });
   }
+
+  apagar(id) {
+    return new Promise((resolve, reject) => {
+      let sql = "DELETE FROM Compra where idCompra = ?";
+      this.db.executeSql(sql, [id]).then((data) => {
+        resolve(data);
+       
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
 }
 

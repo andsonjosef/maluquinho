@@ -27,7 +27,7 @@
     </ion-item>
     <ion-item>
       <ion-label floating>CPF</ion-label>
-      <ion-input [(ngModel)]="cliente.cpf" type="text" formControlName="cpf" [brmasker]="{person: true}"></ion-input>
+      <ion-input [(ngModel)]="cliente.cpf" type="text" formControlName="cpf" [brmasker]="{mask:'000.000.000-00', len:14}"></ion-input>
     </ion-item>
     <ion-item *ngIf="todo.get('cpf').errors && todo.get('cpf').dirty">
       <p color="danger" ion-text *ngIf="todo.get('cpf').hasError('required')"> Campo obrigatorio</p>
