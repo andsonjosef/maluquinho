@@ -19,7 +19,7 @@ export class ClienteDB {
   ) {
     if (!this.isOpen) {
       this.storage = new SQLite();
-      this.storage.create({ name: "data.db", location: "default" }).then((db: SQLiteObject) => {
+      this.storage.create({ name: "maluquinho.db", location: "default" }).then((db: SQLiteObject) => {
         this.db = db;
         db.executeSql(
           "CREATE TABLE IF NOT EXISTS Cliente (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, cpf text, rg text, bairro text, numero text, rua text, quadra text, complemento text, telefone text); ", []);

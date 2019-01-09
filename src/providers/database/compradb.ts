@@ -18,7 +18,7 @@ export class CompraDB {
   ) {
     if (!this.isOpen) {
       this.storage = new SQLite();
-      this.storage.create({ name: "data.db", location: "default" }).then((db: SQLiteObject) => {
+      this.storage.create({ name: "maluquinho.db", location: "default" }).then((db: SQLiteObject) => {
         this.db = db;
         db.executeSql(
           "CREATE TABLE IF NOT EXISTS Compra (id INTEGER PRIMARY KEY AUTOINCREMENT, idCliente REFERENCES Cliente (id) NOT NULL, dataCompra DATE NOT NULL, status BOOLEAN DEFAULT (0),  primeiraParcela DATE, qtdParcelas INTEGER, total DOUBLE );", []);
@@ -90,11 +90,12 @@ export class CompraDB {
 
   apagar(id) {
     return new Promise((resolve, reject) => {
-      let sql = "DELETE FROM Compra where idCompra = ?";
+      let sql = "DELETE FROM Compra where ids = ?";
       this.db.executeSql(sql, [id]).then((data) => {
         resolve(data);
        
       }, (error) => {
+        console.log(error)
         reject(error);
       });
     });

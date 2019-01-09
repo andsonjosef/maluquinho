@@ -28,7 +28,6 @@ export class DetalheCompraPage {
   relatorio;
   constructor(
     public toastCtrl: ToastController,
-    public alerCtrl: AlertController,
     public navCtrl: NavController,
     public navParams: NavParams,
     private parceladb: ParcelaDB,
@@ -80,7 +79,7 @@ export class DetalheCompraPage {
 
   apagar() {
     
-    let confirm = this.alerCtrl.create({
+    let confirm = this.alertCtrl.create({
       title: 'Pagar',
       message: 'Você realmente deseja apagar essa Compra?',
       buttons: [
@@ -113,7 +112,7 @@ export class DetalheCompraPage {
   }
   pagar(id: number, valor: any) {
 
-    let confirm = this.alerCtrl.create({
+    let confirm = this.alertCtrl.create({
       title: 'Pagar',
       message: 'Você realmente deseja pagar essa parcela?',
       buttons: [

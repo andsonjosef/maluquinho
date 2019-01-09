@@ -20,6 +20,8 @@ import localePt from '@angular/common/locales/pt';
 import { RelatorioDB } from '../providers/database/relatoriodb';
 import { EditarClientePageModule } from '../pages/editar-cliente/editar-cliente.module';
 import { SQLitePorter } from '@ionic-native/sqlite-porter';
+import { SqliteDbCopy } from '@ionic-native/sqlite-db-copy';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 registerLocaleData(localePt, 'pt');
 @NgModule({
@@ -43,7 +45,9 @@ registerLocaleData(localePt, 'pt');
     StatusBar,
     SQLite,
     SQLitePorter,
+    SqliteDbCopy,
     SplashScreen,
+    AndroidPermissions,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     { provide: LOCALE_ID, useValue: 'pt' },
     ClienteDB,

@@ -19,6 +19,7 @@ export class RelatorioPage {
   private relatorios: any;
   private inicio: Date;
   private fim: Date;
+  private total = 0;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -37,6 +38,9 @@ export class RelatorioPage {
   listarRelatorios() {
     this.relatoriodb.listarTodoRelatorio().then((data: any) => {
       this.relatorios = data;
+      for(let i = 0; i < this.relatorios.length; i++){
+        this.total = this.total + this.relatorios[i].valor
+      }
     }, (error) => {
       console.log(error);
     })
@@ -51,6 +55,9 @@ export class RelatorioPage {
 
     this.relatoriodb.listarRelatorioFiltrado(inicioformatado, fimformatado).then((data: any) => {
       this.relatorios = data;
+      for(let i = 0; i < this.relatorios.length; i++){
+        this.total = this.total + this.relatorios[i].valor
+      }
     }, (error) => {
       console.log(error);
     })

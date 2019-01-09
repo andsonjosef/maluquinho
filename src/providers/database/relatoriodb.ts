@@ -18,7 +18,7 @@ export class RelatorioDB {
   ) {
     if (!this.isOpen) {
       this.storage = new SQLite();
-      this.storage.create({ name: "data.db", location: "default" }).then((db: SQLiteObject) => {
+      this.storage.create({ name: "maluquinho.db", location: "default" }).then((db: SQLiteObject) => {
         this.db = db;
         db.executeSql(
           "CREATE TABLE IF NOT EXISTS Relatorio (id INTEGER PRIMARY KEY AUTOINCREMENT, dtpagamento DATE NOT NULL, valor DOUBLE NOT NULL, idParcela INTEGER REFERENCES Parcela (id) NOT NULL);", []);

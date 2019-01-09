@@ -19,7 +19,7 @@ export class ItemDB {
   ) {
     if (!this.isOpen) {
       this.storage = new SQLite();
-      this.storage.create({ name: "data.db", location: "default" }).then((db: SQLiteObject) => {
+      this.storage.create({ name: "maluquinho.db", location: "default" }).then((db: SQLiteObject) => {
         this.db = db;
         db.executeSql(
           "CREATE TABLE IF NOT EXISTS Item (id INTEGER PRIMARY KEY AUTOINCREMENT, item STRING NOT NULL, quantidade NUMERIC NOT NULL DEFAULT (1), preco DOUBLE NOT NULL, idCompra INTEGER REFERENCES Compra (id) NOT NULL, total INTEGER);", []);

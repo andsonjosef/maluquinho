@@ -12,4 +12,11 @@
     <img src="/assets/imgs/contas.jpg" />
     <div class="card-title">RELATÓRIO</div>
   </ion-card>
+  
+  <button ion-button block color="sucess" icon-end (click)="criarBackup()">Criar Backup
+    <ion-icon name="md-cloud-download"></ion-icon>
+  </button>
+  <button ion-button block color="danger" icon-end (click)="carregarBackup()">Carregar Backup
+    <ion-icon name="md-cloud-upload"></ion-icon>
+  </button>
 </ion-content>
