@@ -38,6 +38,7 @@ export class RelatorioPage {
   listarRelatorios() {
     this.relatoriodb.listarTodoRelatorio().then((data: any) => {
       this.relatorios = data;
+      this.total = 0;
       for(let i = 0; i < this.relatorios.length; i++){
         this.total = this.total + this.relatorios[i].valor
       }
@@ -55,6 +56,7 @@ export class RelatorioPage {
 
     this.relatoriodb.listarRelatorioFiltrado(inicioformatado, fimformatado).then((data: any) => {
       this.relatorios = data;
+      this.total = 0;
       for(let i = 0; i < this.relatorios.length; i++){
         this.total = this.total + this.relatorios[i].valor
       }

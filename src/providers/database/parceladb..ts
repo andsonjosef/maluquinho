@@ -187,8 +187,8 @@ export class ParcelaDB {
 
   editarParcela(parcela) {
     return new Promise((resolve, reject) => {
-      let sql = "UPDATE parcela SET vencimento = ?  WHERE id = ?";
-      this.db.executeSql(sql, [parcela.vencimento, parcela.id]).then((data) => {
+      let sql = "UPDATE parcela SET vencimento = ?, preco = ?  WHERE id = ?";
+      this.db.executeSql(sql, [parcela.vencimento,  parcela.preco, parcela.id]).then((data) => {
         resolve(data);
       
       }, (error) => {

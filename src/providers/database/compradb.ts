@@ -75,6 +75,17 @@ export class CompraDB {
       })
     })
   }
+  editarCompra(total, id) {
+    return new Promise((resolve, reject) => {
+      let sql = "UPDATE compra SET total = ? WHERE id = ?";
+      this.db.executeSql(sql, [total, id]).then((data) => {
+        resolve(data);
+      
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
 
   cadastrarCompra(compra) {
     return new Promise((resolve, reject) => {

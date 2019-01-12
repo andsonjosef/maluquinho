@@ -185,6 +185,12 @@ export class DetalheCompraPage {
     alert.setTitle('Lightsaber color');
 
     alert.addInput({
+      name: 'preco',
+      type: 'number',
+      value: p.preco
+    });
+
+    alert.addInput({
       name: 'date',
       type: 'date',
       value: p.vencimento
@@ -195,6 +201,7 @@ export class DetalheCompraPage {
       text: 'Confirmar',
       handler: data => {
         console.log(data.date);
+        p.preco = data.preco;
         p.vencimento = data.date;
         this.editarParcela(p);
       }
@@ -207,8 +214,13 @@ export class DetalheCompraPage {
     this.parceladb.editarParcela(p).then((data) => {
       this.listarItens(this.compra.id);
       this.listarParcelas(this.compra.id);
+      let novoTotal = 0;
+      for(let i = 0; i < this.parcelas.length; i++){
+        novoTotal = novoTotal + this.parcelas[i].preco
+      }
+      this.compradb.editarCompra(novoTotal, this.parcelas[0].id);
       let toast = this.toastCtrl.create({
-        message: 'Data alterada.',
+        message: 'Parcela alterada.',
         duration: 2000,
         position: 'top'
       });
@@ -218,7 +230,7 @@ export class DetalheCompraPage {
     }, (error) => {
       console.log(error);
       let toast = this.toastCtrl.create({
-        message: 'Erro ao alterar a data.',
+        message: 'Erro ao alterar a Parcela.',
         duration: 2000,
         position: 'top'
       });
