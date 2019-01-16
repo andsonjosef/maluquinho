@@ -4,13 +4,6 @@ import { ParcelaDB } from '../../providers/database/parceladb.';
 import { DatePipe } from '@angular/common';
 import { CompraDB } from '../../providers/database/compradb';
 
-/**
- * Generated class for the CobrancaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-cobranca',

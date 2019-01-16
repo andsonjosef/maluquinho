@@ -1,5 +1,5 @@
 <ion-content class="card-background-page">
- 
+
   <ion-card (click)="listarCliente()">
     <img src="/assets/imgs/clientes.png" />
     <div class="card-title">CLIENTES</div>
@@ -12,7 +12,11 @@
     <img src="/assets/imgs/contas.jpg" />
     <div class="card-title">RELATÓRIO</div>
   </ion-card>
-  
+  <ion-card (click)="horaAlerta()">
+    <img src="/assets/imgs/alerta.png" />
+    <div class="card-title">ALERTA</div>
+  </ion-card>
+
   <button ion-button block color="sucess" icon-end (click)="criarBackup()">Criar Backup
     <ion-icon name="md-cloud-download"></ion-icon>
   </button>

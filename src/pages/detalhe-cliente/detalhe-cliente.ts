@@ -4,13 +4,6 @@ import { ClienteDB } from '../../providers/database/clientedb';
 import { CompraDB } from '../../providers/database/compradb';
 import { EditarClientePage } from '../editar-cliente/editar-cliente';
 
-/**
- * Generated class for the DetalheClientePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-detalhe-cliente',
@@ -33,7 +26,6 @@ export class DetalheClientePage {
     this.buscarCliente(parseInt(this.id));
     this.listarCompras(parseInt(this.id));
   }
-
 
   buscarCliente(id: number) {
     this.clientedb.buscarCliente(id).then((data: any) => {

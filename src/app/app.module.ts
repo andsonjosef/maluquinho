@@ -22,7 +22,10 @@ import { EditarClientePageModule } from '../pages/editar-cliente/editar-cliente.
 import { SQLitePorter } from '@ionic-native/sqlite-porter';
 import { SqliteDbCopy } from '@ionic-native/sqlite-db-copy';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
-
+import { LocalNotifications } from '@ionic-native/local-notifications';
+import { AlertaPageModule } from '../pages/alerta/alerta.module';
+import { AlertaDB } from '../providers/database/alertadb.';
+import { HomePage } from '../pages/home/home';
 registerLocaleData(localePt, 'pt');
 @NgModule({
   declarations: [
@@ -35,6 +38,7 @@ registerLocaleData(localePt, 'pt');
     CurrencyMaskModule,
     PagamentoModalPageModule,
     EditarClientePageModule,
+    AlertaPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -42,6 +46,7 @@ registerLocaleData(localePt, 'pt');
     MyApp
   ],
   providers: [
+    LocalNotifications,
     StatusBar,
     SQLite,
     SQLitePorter,
@@ -51,6 +56,7 @@ registerLocaleData(localePt, 'pt');
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     { provide: LOCALE_ID, useValue: 'pt' },
     ClienteDB,
+    AlertaDB,
     CompraDB,
     ParcelaDB,
     ItemDB,

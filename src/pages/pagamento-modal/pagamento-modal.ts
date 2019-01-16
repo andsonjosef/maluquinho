@@ -5,13 +5,8 @@ import { ParcelaDB } from '../../providers/database/parceladb.';
 import { CompraDB } from '../../providers/database/compradb';
 import { ItemDB } from '../../providers/database/itemdb';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-/**
- * Generated class for the PagamentoModalPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { AlertaDB } from '../../providers/database/alertadb.';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 @IonicPage()
 @Component({
@@ -19,7 +14,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   templateUrl: 'pagamento-modal.html',
 })
 export class PagamentoModalPage {
- private compra = {
+
+  private dataAlerta = "";
+  private alerta: any
+  private compra = {
     id: "",
     idCliente: "",
     dataCompra: "",
@@ -28,8 +26,7 @@ export class PagamentoModalPage {
     qtdParcelas: 1,
     total: 0,
   }
-
- private item = {
+  private item = {
     id: 0,
     item: "",
     quantidade: 0,
@@ -37,8 +34,7 @@ export class PagamentoModalPage {
     idCompra: 0,
     total: 0,
   }
-
- private parcela = {
+  private parcela = {
     id: 0,
     parcela: "",
     status: 0,
@@ -64,6 +60,8 @@ export class PagamentoModalPage {
     private itemdb: ItemDB,
     private parceladb: ParcelaDB,
     private formBuilder: FormBuilder,
+    private alertadb: AlertaDB,
+    private localNoti: LocalNotifications,
   ) {
     this.todo = this.formBuilder.group({
       desconto: ['', Validators.required],
@@ -72,19 +70,25 @@ export class PagamentoModalPage {
     });
   }
 
+  ionViewWillEnter() {
+    this.listarAlerta()
+  }
+
+  ionViewDidLoad() {
+    this.clienteId = this.navParams.get('clienteId');
+    this.total = this.navParams.get('total');
+    this.itens = this.navParams.get('itens');
+    this.final = this.total - this.desconto;
+    this.listarAlerta()
+    console.log('ionViewDidLoad PagamentoModalPage' + this.clienteId);
+  }
+
   dismiss() {
     this.viewCtrl.dismiss();
   }
 
   calcular() {
     this.final = this.total - this.desconto;
-  }
-  ionViewDidLoad() {
-    this.clienteId = this.navParams.get('clienteId');
-    this.total = this.navParams.get('total');
-    this.itens = this.navParams.get('itens');
-    this.final = this.total - this.desconto;
-    console.log('ionViewDidLoad PagamentoModalPage' + this.clienteId);
   }
 
   cadastrarCompra() {
@@ -95,7 +99,6 @@ export class PagamentoModalPage {
     this.compra.dataCompra = formatade;
     this.compra.total = this.final;
     this.compra.idCliente = this.clienteId;
-
     this.compradb.cadastrarCompra(this.compra).then((data: number) => {
       this.compraId = data;
       for (let i = 0; i < this.itens.length; i++) {
@@ -128,13 +131,14 @@ export class PagamentoModalPage {
         })
       }
 
+      this.definirAlerta();
       this.navCtrl.setRoot('DetalheClientePage', { id: this.clienteId });
       let toast = this.toastCtrl.create({
         message: 'Compra cadastrada com sucesso.',
         duration: 2000,
         position: 'top'
       });
-  
+
       toast.present(toast);
     }, (error) => {
       let toast = this.toastCtrl.create({
@@ -142,11 +146,69 @@ export class PagamentoModalPage {
         duration: 2000,
         position: 'top'
       });
-  
+
       toast.present(toast);
       console.log(error);
     })
     this.compra.dataCompra
   }
 
+  listarAlerta() {
+    this.alertadb.dataAlerta().then((data: any) => {
+      this.alerta = data;
+    }, (error) => {
+      console.log(error);
+    })
+  }
+
+  definirAlerta() {
+    let date = new Date();
+    let datePipe = new DatePipe('pt');
+    let formatade = datePipe.transform(date, 'yyyy-MM-dd');
+    if (date.getHours() >= this.alerta.hora) {
+      if (date.getMinutes() > this.alerta.minuto) {
+        this.alertadb.dataProximaDiaSeguinte(formatade).then((data: any) => {
+          this.dataAlerta = data;
+          this.alerta.dataAlerta = data;
+        }, (error) => {
+          console.log(error);
+        })
+      } else {
+        this.alertadb.dataProxima(formatade).then((data: any) => {
+          this.dataAlerta = data;
+          this.alerta.dataAlerta = data;
+        }, (error) => {
+          console.log(error);
+        })
+      }
+    } else {
+      this.alertadb.dataProxima(formatade).then((data: any) => {
+        this.dataAlerta = data;
+        this.alerta.dataAlerta = data;
+      }, (error) => {
+        console.log(error);
+      })
+    }
+    this.alerta.id = 1;
+    let formddtaAlerta = datePipe.transform(this.dataAlerta, 'yyyy-MM-dd');
+    this.alerta.dataAlerta = formddtaAlerta
+    this.alertadb.apagar();
+    this.alertadb.definirAlerta(this.alerta).then((data: any) => {
+    }, (error) => {
+      console.log(error);
+    })
+    this.listarAlerta()
+    let dateAle = new Date()
+    let ano = parseInt(this.alerta.dataAlerta.substring(0, this.alerta.dataAlerta.indexOf("-")));
+    let mes = parseInt(this.alerta.dataAlerta.substring(this.alerta.dataAlerta.indexOf("-") + 1, this.alerta.dataAlerta.lastIndexOf("-")));
+    let dia = parseInt(this.alerta.dataAlerta.substring(this.alerta.dataAlerta.lastIndexOf("-") + 1));
+    dateAle.setFullYear(ano, mes - 1, dia)
+    dateAle.setHours(this.alerta.hora, this.alerta.minuto, 0)
+    this.localNoti.schedule({
+      id: 1,
+      title: 'Atenção',
+      text: 'Existem novas cobranças para hoje.',
+      trigger: { at: new Date(dateAle) },
+    });
+  }
 }

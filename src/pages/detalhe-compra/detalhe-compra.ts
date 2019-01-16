@@ -7,13 +7,6 @@ import { RelatorioDB } from '../../providers/database/relatoriodb';
 import { ClienteDB } from '../../providers/database/clientedb';
 import { CompraDB } from '../../providers/database/compradb';
 
-/**
- * Generated class for the DetalheCompraPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-detalhe-compra',
@@ -37,7 +30,6 @@ export class DetalheCompraPage {
     private relatoriodb: RelatorioDB,
     public alertCtrl: AlertController) {
   }
-
 
   ionViewDidLoad() {
     this.compra = this.navParams.get('compraS');
@@ -101,8 +93,6 @@ export class DetalheCompraPage {
             this.itemdb.apagar(this.compra.id)
             this.compradb.apagar(this.compra.id)
             this.navCtrl.push('DetalheClientePage', { id: this.cliente.id });
-
-
           }
         }
 
@@ -183,19 +173,16 @@ export class DetalheCompraPage {
   selecionarData(p) {
     let alert = this.alertCtrl.create();
     alert.setTitle('Lightsaber color');
-
     alert.addInput({
       name: 'preco',
       type: 'number',
       value: p.preco
     });
-
     alert.addInput({
       name: 'date',
       type: 'date',
       value: p.vencimento
     });
-
     alert.addButton('Cancelar');
     alert.addButton({
       text: 'Confirmar',

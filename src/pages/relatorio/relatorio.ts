@@ -3,12 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RelatorioDB } from '../../providers/database/relatoriodb';
 import { DatePipe } from '@angular/common';
 
-/**
- * Generated class for the RelatorioPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -53,7 +47,6 @@ export class RelatorioPage {
     let datePipe = new DatePipe('pt');
     let inicioformatado = datePipe.transform(dateInicio, 'yyyy-MM-dd');
     let fimformatado = datePipe.transform(dateFim, 'yyyy-MM-dd');
-
     this.relatoriodb.listarRelatorioFiltrado(inicioformatado, fimformatado).then((data: any) => {
       this.relatorios = data;
       this.total = 0;

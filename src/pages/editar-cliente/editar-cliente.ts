@@ -4,13 +4,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ClienteDTO } from '../../models/cliente.dto';
 import { ClienteDB } from '../../providers/database/clientedb';
 
-/**
- * Generated class for the EditarClientePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-editar-cliente',
@@ -33,7 +26,6 @@ export class EditarClientePage {
     telefone: ""
   };
 
-
   constructor(public navCtrl: NavController,
     public toastCtrl: ToastController,
     public navParams: NavParams,
@@ -51,7 +43,6 @@ export class EditarClientePage {
       quadra: ['', Validators.required],
       complemento: ['', Validators.required],
       telefone: ['', Validators.required],
-
     });
   }
 
@@ -60,7 +51,6 @@ export class EditarClientePage {
   }
 
   editarCliente() {
-
     this.database.editarCliente(this.cliente).then((data) => {
      
       this.navCtrl.push('ListarClientePage');
@@ -68,22 +58,18 @@ export class EditarClientePage {
         message: 'Cliente editado com sucesso.',
         duration: 2000,
         position: 'top'
-      });
-  
+      }); 
       toast.present(toast);
-
     }, (error) => {
       let toast = this.toastCtrl.create({
         message: 'Erro ao editar o cliente.',
         duration: 2000,
         position: 'top'
-      });
-  
+      }); 
       toast.present(toast);
       console.log(error);
     })
   }
-
 
   ionViewDidLoad() {
     this.cliente = this.navParams.get('cliente');

@@ -2,13 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ClienteDB } from '../../providers/database/clientedb';
 
-/**
- * Generated class for the ListarClientePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-listar-cliente',
@@ -44,16 +37,13 @@ export class ListarClientePage {
   selecionarCliente(id: string) {
     this.navCtrl.push('DetalheClientePage', { id: id });
   }
-
   
   cadastrarCliente() {
     this.navCtrl.push('ClientePage');
   }
   pesquisar(ev: any) {
     this.listaCliente = [];
-
     const val = ev.target.value;
-
     if (val && val.trim() != '') {
       this.database.listarClientesNome(val).then((data: any) => {
         this.listaCliente = data;

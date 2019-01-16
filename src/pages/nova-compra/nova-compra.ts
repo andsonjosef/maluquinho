@@ -5,13 +5,6 @@ import { ItemDB } from '../../providers/database/itemdb';
 import { DatePipe } from '@angular/common';
 import { PagamentoModalPage } from '../pagamento-modal/pagamento-modal';
 
-/**
- * Generated class for the NovaCompraPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-nova-compra',
@@ -59,11 +52,9 @@ export class NovaCompraPage {
     this.rows = [false];
   }
 
-
   calcular(i) {
     this.precos[i] = parseInt(this.precos[i].toFixed(2));
     this.totalI[i] = (this.quantidades[i] * this.precos[i]);
-
   }
   addRow() {
     this.rows.push(false);
@@ -76,6 +67,7 @@ export class NovaCompraPage {
     this.idCompras.splice(i, 1);
     this.rows.splice(i, 1);
   }
+
   ionViewDidLoad() {
     this.clienteId = this.navParams.get('id');
     this.compra.idCliente = this.clienteId;
@@ -86,7 +78,6 @@ export class NovaCompraPage {
     let date = new Date();
     let datePipe = new DatePipe('pt');
     let formatade = datePipe.transform(date, 'dd-MM-yyyy');
-
     this.compra.dataCompra = formatade;
     this.compradb.cadastrarCompra(this.compra).then((data: number) => {
       for (let i = 0; i < this.rows.length; i++) {
@@ -120,9 +111,7 @@ export class NovaCompraPage {
   }
   openModal() {
     this.valid = true;
-
     for (let i = 0; i < this.rows.length; i++) {
-
       if (this.itemN[i] == '' || this.itemN[i] == null) {
         this.valid = false;
         const alert = this.alertCtrl.create({
@@ -165,15 +154,11 @@ export class NovaCompraPage {
           preco: this.precos[i],
           idCompra: 0,
           total: this.quantidades[i] * this.precos[i],
-
         }
         this.total = this.total + (this.quantidades[i] * this.precos[i])
-
         this.itens[i] = this.item;
         i++;
       }
-
-
       let modal = this.modalCtrl.create(PagamentoModalPage, { total: this.total, itens: this.itens, clienteId: this.clienteId });
       modal.present();
     }

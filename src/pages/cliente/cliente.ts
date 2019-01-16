@@ -91,7 +91,6 @@ export class ClientePage {
     cpf = cpf.replace(".", "");
     cpf = cpf.replace(".", "");
     cpf = cpf.replace("-", "");
-    console.log("cpf " + cpf)
     if (cpf == null) {
       return false;
     }
