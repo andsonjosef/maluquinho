@@ -172,7 +172,7 @@ export class DetalheCompraPage {
 
   selecionarData(p) {
     let alert = this.alertCtrl.create();
-    alert.setTitle('Lightsaber color');
+    alert.setTitle('Editar');
     alert.addInput({
       name: 'preco',
       type: 'number',

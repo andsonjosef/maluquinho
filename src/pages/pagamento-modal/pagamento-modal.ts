@@ -130,9 +130,9 @@ export class PagamentoModalPage {
           console.log(error);
         })
       }
-
-      this.definirAlerta();
-      this.navCtrl.setRoot('DetalheClientePage', { id: this.clienteId });
+      this.navCtrl.popTo(this.navCtrl.getByIndex(1))
+      
+    
       let toast = this.toastCtrl.create({
         message: 'Compra cadastrada com sucesso.',
         duration: 2000,
@@ -150,6 +150,7 @@ export class PagamentoModalPage {
       toast.present(toast);
       console.log(error);
     })
+    this.definirAlerta();
     this.compra.dataCompra
   }
 

@@ -60,7 +60,7 @@ export class ClientePage {
       toast.present(toast);
     } else {
       this.database.cadastrarCliente(this.cliente).then((data) => {
-        this.navCtrl.push('ListarClientePage');
+        this.navCtrl.pop();
         let toast = this.toastCtrl.create({
           message: 'Cliente cadastrado com sucesso.',
           duration: 2000,
